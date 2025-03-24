@@ -1,31 +1,39 @@
 # ViewPoint
-ViewPoint is a math expression parser and evaluator with the support of runtime data-type checking written in vanila JS. It allows you to evaluate mathematical expressions with ease while ensuring the correctness of the input data.
+ViewPoint is a math expression parser and evaluator that supports runtime data-type checking written in native JS. It allows you to evaluate mathematical expressions with ease while ensuring the correctness of the input data.
+
+## ViewPoint example usage:
+**Screenshot:**
+![ViewPoint Screenshot:](https://raw.githubusercontent.com/nirmalpaul383/ViewPoint/refs/heads/main/Screenshots/Screenshot%201.jpg)
 
 ## Features
 1. **<ins>Expression Evaluation:</ins>**
      - <ins>Parses and evaluates</ins> mathematical expressions like '5*52+285/2'
-     - Supports basic <ins>arithmetic operators</ins> (+, -, \*, /,^, %) [Note: here % is implemented as modules / reminder operator]
+     - Supports basic <ins>arithmetic operators</ins> (+, -, \*, /,^, %). **[Note: here % is implemented as modules / reminder operator]**
      - Supports <ins>nested expressions</ins> with parentheses (e.g. (36/2)-4)
      - Allows complex expressions with <ins>multiple levels of nesting </ins>  (e.g (52/8+2)+56*((25/2)*4+(8-2))
      - Supports <ins>multiple datatypes</ins> e.g expressions with decimal / floating points numbers, BigInt, String, and Boolean datatype
-2. **<ins>Expression Tokenization:</ins>**
-     - It can tokenize a mathematical expression into individual tokens and can returns <ins> tokenized expression as an array</ins> (e.g expression = "5 + 7*2+(85^2+1)", token = [5,'+',7,'*',2,'+','(',85,'^',2,'+',1,')'])
-3. **<ins>Infix to Postfix Conversion:</ins>**
+2. **<ins>Data Type Validation:</ins>**
+     - Validates data types during expression evaluation, throwing errors for invalid operations (e.g., attempting sum or multiplication between strings and numbers).
+4. **<ins>Expression Tokenization:</ins>**
+     - It can tokenize a mathematical expression into individual tokens and can return <ins> tokenized expression as an array</ins> (e.g expression = "5 + 7*2+(85^2+1)", token = [5,'+',7,'*',2,'+','(',85,'^',2,'+',1,')'])
+5. **<ins>Infix to Postfix Conversion:</ins>**
      - It can convert <ins>infix expressions to postfix notation</ins> and return as an array
-4.  **<ins>JavaScript Variable Support:</ins>**
+6.  **<ins>JavaScript Variable Support:</ins>**
      - ViewPoint supports using of <ins> JavaScript variables </ins> in an expressions using ```${}``` and backticks (``` ` ```)
-5. **<ins>External Variable Support:</ins>**
+7. **<ins>External Variable Support:</ins>**
      - Allows users to <ins>define external variables</ins> using the ```.var()``` method
-6. **<ins>Operator Order Control:</ins>**
+8. **<ins>Operator Order Control:</ins>**
      - <ins>Follows PEMDAS</ins> (Parentheses, Exponents, Multiplication and Division, and Addition and Subtraction) order of operations by default
      - Allows users to define their <ins>own custom order of operations</ins> (if needed)
-7. **<ins>Customizable Operator Behavior:</ins>**
+9. **<ins>Customizable Operator Behavior:</ins>**
      - Allows users to <ins>re-define the math operator (e.g. '*' or '%') behavior</ins> to suit specific requirements (if needed)
   
 ## How to include this library in your project?
 To use this evaluator/library, firstly, you need to link **ViewPoint.js** to your project. You can do that by using two ways:
 1. **Download/Clone and Use:** Download or clone the repository and use the **ViewPoint.js** file in your project.
-2. **Use via CDN:** Use the library directly via CDN using the following script tag: ```https://cdn.jsdelivr.net/gh/nirmalpaul383/ViewPoint/ViewPoint.js```
+2. **Use via CDN:**
+     - Use the library directly via CDN using the following script tag: ```https://cdn.jsdelivr.net/gh/nirmalpaul383/ViewPoint/ViewPoint.js```
+     - For using it in browser/webpage you can use ```<script src="https://cdn.jsdelivr.net/gh/nirmalpaul383/ViewPoint/ViewPoint.js"></script>```
 
 ## How to use this library?
 ### After including this library, you will need to:
@@ -108,8 +116,8 @@ let ViewPoint_obj = new ViewPoint();
 //Defining external variable with the name of "myVar"
 ViewPoint_obj.var("myVar", 400);
 
-//Sample expression with JavaScript variable
-const expresion = `35 *100 -myVar`;
+//Sample expression with an external variable
+const expresion = `35 *100 - myVar`;
 
 //Expression evaluating and storing the result into the output variable
 let output = ViewPoint_obj.evaluate(expresion);
@@ -176,12 +184,12 @@ console.log(output2); //Output: 6
 This object is used for defining of some basic math logic and math operations for ViewPoint
 |  Name | Type | Details |
 | - | - |- |
-|**operator_precedence**|**Object**|This object contains operator's precedence value according to the BODMAS or PEMDAS rule|
+|**operator_precedence**|**Object**|This object contains the operator's precedence value according to the BODMAS or PEMDAS rule <br>**Default operator's precedence values:** `operator_precedence: {'^': 4, '*': 3, '/': 2, '%': 2,'+': 1,'-': 1}`|
 |**exponents(value1, value2)**|**Method**|Definition of Power(^) operator Behavior|
 |**multiplication(value1, value2)**|**Method**|Definition of Multiplication(*) operator Behavior|
 |**division(value1, value2)**|**Method**|Definition of Division(/) operator Behavior|
 |**modulus(value1, value2)**|**Method**|Definition of Modulus(%) operator Behavior|
-|**addition(value1, value2)**|**Method**|Definition of Addition(+) operator Behavior|
+|**addition(value1, value2)**|**Method**|Definition of Addition(+) and concatenation(+) operator Behavior|
 |**subtraction(value1, value2)**|**Method**|Definition of Subtraction(-) operator Behavior|
 
 
