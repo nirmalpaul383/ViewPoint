@@ -49,7 +49,7 @@ class ViewPoint {
             //Throw Data Type Error
             else {
                 let errMsg = `Data Type Error: Power operator (^) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
-Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
+Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
                 throw new Error(errMsg);
             }
         },
@@ -67,7 +67,7 @@ Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof
             //Throw Data Type Error
             else {
                 let errMsg = `Data Type Error: Multiplication operator (*) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
-Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
+Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
                 throw new Error(errMsg);
             }
 
@@ -85,7 +85,7 @@ Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof
             //Throw Data Type Error
             else {
                 let errMsg = `Data Type Error: Division operator (/) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
-Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
+Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
                 throw new Error(errMsg);
             }
 
@@ -104,7 +104,7 @@ Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof
             //Throw Data Type Error
             else {
                 let errMsg = `Data Type Error: Modulus operator (%) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
-Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
+Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
                 throw new Error(errMsg);
             }
 
@@ -130,7 +130,7 @@ Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof
             else {
                 let errMsg = `Data Type Error: Addition operator (+): requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
 Concatenation operator (+): requires both operands to be string.
-Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
+Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
                 throw new Error(errMsg);
             }
 
@@ -149,7 +149,7 @@ Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof
             //Throw TypeError
             else {
                 let errMsg = `Data Type Error: Subtraction operator (-) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
-Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
+Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
                 throw new Error(errMsg);
             }
         },
