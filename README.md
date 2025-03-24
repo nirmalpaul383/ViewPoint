@@ -1,8 +1,7 @@
 # ViewPoint
 ViewPoint is a math expression parser and evaluator that supports runtime data-type checking written in native JS. It allows you to evaluate mathematical expressions with ease while ensuring the correctness of the input data.
 
-## ViewPoint example usage:
-**Screenshot:**
+## ViewPoint example usage screenshot:
 ![ViewPoint Screenshot:](https://raw.githubusercontent.com/nirmalpaul383/ViewPoint/refs/heads/main/Screenshots/Screenshot%201.jpg)
 
 ## Features
@@ -44,7 +43,7 @@ let ViewPoint_obj = new ViewPoint();
 ```
 + **<ins>Store your expression in string format:</ins>**
 ```JavaScript
-////Sample Expression
+//Sample Expression
 const expresion = `((52/8+2)+56*((25/2)*4+(8-2)))*2`;
 ```
 + **<ins>For evaluating an expression use ```.evaluate()``` method:</ins>**
@@ -55,6 +54,34 @@ let output = ViewPoint_obj.evaluate(expresion);
 //For output
 console.log(output); //Output 6289 to the console
 ```
+## Example usages
++ ### Expression Evaluation with runtime data types checking
+```javascript
+//Create a new ViewPoint object with ViewPoint class
+let ViewPoint_obj = new ViewPoint();
+
+//Simple Expression evaluation
+console.log(ViewPoint_obj.evaluate(`25+5*2`)); //Output 35 to the console
+
+//Nested expression evaluation
+console.log(ViewPoint_obj.evaluate(`((52/8+2)+56*((25/2)*4+(8-2)))*2`)); //Output 6289 to the console
+
+//BigInt Expression evaluation
+console.log(ViewPoint_obj.evaluate(`11n ^2n`)); //Output 121n to the console
+
+//String concatenation: '+' Operator behaves as concatenation operator if all operands are string
+console.log(ViewPoint_obj.evaluate(`"Hello " + "World"`)); //Output "Hello World" to the console
+
+//Invalid Expression: One operand is a string and another one is number
+console.log(ViewPoint_obj.evaluate(`"45" + 5`)); //Throws a datatype error
+
+//Invalid Expression: One operand is a number and another one is boolean
+console.log(ViewPoint_obj.evaluate(`45 * true`)); //Throws a datatype error
+
+//Invalid Expression: unclosed quoted text
+console.log(ViewPoint_obj.evaluate(`"Hello World `)); //Throws a error message for unclosed quoted text
+```
+
 ## Other usages and methods
 + ### Expression Tokenization using ```.tokenize()``` method
 ```Javascript
