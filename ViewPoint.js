@@ -38,16 +38,18 @@ class ViewPoint {
 
         //Power(^) calculation
         exponents(value1, value2) {
-            //If both operands are floating point number data types (default number type in JavaScript is floating point number)
+            //If both operands are number data types (default number type in JavaScript is floating point number) or BigInt number data types
             //Only then the math operation will be performed otherwise an error message will be thrown
-            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'number')) {
-                return Math.pow(value1, value2);
+            if ((typeof (value1) === typeof (value2)) && ((typeof (value1) === 'number') || (typeof (value1) === 'bigint'))) {
+
+                //Using '**' operator instead of Math.pow() for power calculations, as Math.pow() doesn't support BigInt data types
+                return (value1 ** value2);
             }
 
-            //Throw TypeError for floating numeric operands
+            //Throw Data Type Error
             else {
-                let errMsg = `Data Type Error: Power operator (^) only supports floating point numbers. (default number type of JavaScript).
-Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
+                let errMsg = `Data Type Error: Power operator (^) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
+Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
                 throw new Error(errMsg);
             }
         },
@@ -55,16 +57,17 @@ Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
         //Multiplication(*) calculation
         multiplication(value1, value2) {
 
-            //If both operands are floating point number data types (default number type in JavaScript is floating point number)
+            //If both operands are number data types (default number type in JavaScript is floating point number) or BigInt number data types
             //Only then the math operation will be performed otherwise an error message will be thrown
-            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'number')) {
-                return value1 * value2;
+            if ((typeof (value1) === typeof (value2)) && ((typeof (value1) === 'number') || (typeof (value1) === 'bigint'))) {
+
+                return (value1 * value2);
             }
 
-            //Throw TypeError for floating numeric operands
+            //Throw Data Type Error
             else {
-                let errMsg = `Data Type Error: Multiplication operator (*) only be used in floating point numbers. (default number type of JavaScript).
-Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
+                let errMsg = `Data Type Error: Multiplication operator (*) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
+Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
                 throw new Error(errMsg);
             }
 
@@ -72,16 +75,17 @@ Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
 
         //Division(/) calculation
         division(value1, value2) {
-            //If both operands are floating point number data types (default number type in JavaScript is floating point number)
+            //If both operands are number data types (default number type in JavaScript is floating point number) or BigInt number data types
             //Only then the math operation will be performed otherwise an error message will be thrown
-            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'number')) {
-                return value1 / value2;
+            if ((typeof (value1) === typeof (value2)) && ((typeof (value1) === 'number') || (typeof (value1) === 'bigint'))) {
+
+                return (value1 / value2);
             }
 
-            //Throw TypeError for floating numeric operands
+            //Throw Data Type Error
             else {
-                let errMsg = `Data Type Error: Division operator (/) only be used in floating point numbers. (default number type of JavaScript).
-Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
+                let errMsg = `Data Type Error: Division operator (/) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
+Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
                 throw new Error(errMsg);
             }
 
@@ -90,16 +94,17 @@ Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
 
         //Modulus(%) calculation
         modulus(value1, value2) {
-            //If both operands are floating point number data types (default number type in JavaScript is floating point number)
+            //If both operands are number data types (default number type in JavaScript is floating point number) or BigInt number data types
             //Only then the math operation will be performed otherwise an error message will be thrown
-            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'number')) {
-                return value1 % value2;
+            if ((typeof (value1) === typeof (value2)) && ((typeof (value1) === 'number') || (typeof (value1) === 'bigint'))) {
+
+                return (value1 % value2);
             }
 
-            //Throw TypeError for floating numeric operands
+            //Throw Data Type Error
             else {
-                let errMsg = `Data Type Error: Modulus operator (%) only be used in floating point numbers. (default number type of JavaScript).
-        Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
+                let errMsg = `Data Type Error: Modulus operator (%) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
+Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
                 throw new Error(errMsg);
             }
 
@@ -107,25 +112,25 @@ Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
         },
 
 
-        //Addition(+) calculation
+        //Addition(+) calculation or String Concatenation
         addition(value1, value2) {
-            //If both operands are floating point number data types (default number type in JavaScript is floating point number)
-            //Only then the math operation will be performed.
+            //If both operands are number data types (default number type in JavaScript is floating point number) or BigInt number data types only then the math operation will be performed.
             //Otherwise if both operands are string type then concatenation will be performed
             //Otherwise, an error message will be thrown
-            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'number')) {
-                return value1 + value2;
+            if ((typeof (value1) === typeof (value2)) && ((typeof (value1) === 'number') || (typeof (value1) === 'bigint'))) {
+
+                return (value1 + value2);
             }
             else if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'string')) {
                 //Returns the concatenated string value
-                return value1.concat(value2);
+                return (value1.concat(value2));
             }
 
             //Throw TypeError
             else {
-                let errMsg = `Data Type Error: Addition / Concatenation operator (+) only be used in same data types values,
-either floating point numbers (default number type of JavaScript) or strings data types.
-Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
+                let errMsg = `Data Type Error: Addition operator (+): requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
+Concatenation operator (+): requires both operands to be string.
+Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
                 throw new Error(errMsg);
             }
 
@@ -134,16 +139,17 @@ Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
 
         //Subtraction(-) calculation
         subtraction(value1, value2) {
-            //If both operands are floating point number data types (default number type in JavaScript is floating point number)
+            //If both operands are number data types (default number type in JavaScript is floating point number) or BigInt number data types
             //Only then the math operation will be performed otherwise an error message will be thrown
-            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'number')) {
-                return value1 - value2;
+            if ((typeof (value1) === typeof (value2)) && ((typeof (value1) === 'number') || (typeof (value1) === 'bigint'))) {
+
+                return (value1 - value2);
             }
 
-            //Throw TypeError for floating numeric operands
+            //Throw TypeError
             else {
-                let errMsg = `Data Type Error: Subtraction operator (-) only be used in floating point numbers. (default number type of JavaScript).
-Data types are: ${value1}: ${typeof (value1)} & ${value2}: ${typeof (value2)}`
+                let errMsg = `Data Type Error: Subtraction operator (-) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
+Received: ${value1} type of: (${typeof value1}) and ${value2} type of: (${typeof value2})`
                 throw new Error(errMsg);
             }
         },
