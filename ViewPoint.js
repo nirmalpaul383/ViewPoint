@@ -445,7 +445,7 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
         //meaning there is a text section that was started with a quotation character but not properly terminated with a matching quotation character.
         if (quote_block !== "") {
             // For throwing an error message indicating that the string contains unclosed quoted text
-            throw new Error(`Unclosed quoted text detected: ${expresion_Str} contains unclosed quoted text`)
+            throw new Error(`Unclosed quoted text detected: ${expr} contains unclosed quoted text`)
         }
 
         else {
@@ -682,6 +682,4 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
     }
 
 }
-
-
 
