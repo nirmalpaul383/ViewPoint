@@ -177,7 +177,7 @@ VP_Obj.addFunc("am_I_Allowed_For_Driving", (age) => {
 
 //Using our custom function in expression and output to the console
 console.log(VP_Obj.evaluate("#am_I_Allowed_For_Driving(4)")) //Output "You are under 18 years so you are not allowed for driving !!!"
-console.log(VP_Obj.evaluate("#am_I_Allowed_For_Driving(21)")) //Output "You are under 18 years so you are not allowed for driving !!!"
+console.log(VP_Obj.evaluate("#am_I_Allowed_For_Driving(21)")) //Output "Congratulations! You can drive"
 
 
 ```
