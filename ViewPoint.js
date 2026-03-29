@@ -162,6 +162,257 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
 
     }
 
+    //For storing ViewPoint 's built-in functions
+    func_DB_intrnl = {
+
+        //For defining the #max function with JavaScript 's builtin Math object
+        //#max function will return the largest number of the provided numerical arguments
+        "max": function (...inputArray) {
+
+            //For returning the ouput
+            return Math.max(...inputArray);
+        },
+
+        //For defining the #min function with JavaScript 's builtin Math object
+        //#min function will return the smallest number of the provided numerical arguments
+        "min": function (...inputArray) {
+
+            //For returning the ouput
+            return Math.min(...inputArray);
+        },
+
+        //For defining the #and function
+        //#and will test each of its arguments , if all are true then it will return true
+        "and": function (...inputArray) {
+
+            //Will be used for storing the output
+            let output = true; //The default value is set to true
+
+            //For testing each of the element of the inputArray
+            for (let i = 0; i <= (inputArray.length - 1); i++) {
+
+                //When the ouput value and the element value both are true only then the output will be set to true,
+                //otherwise the output variable becomes false.
+                output = (output && inputArray[i]);
+
+                //Once a output becomes a false, there is no need to continuing the for loop for testing.
+                //The for loop must be break
+                if (output === false) {
+                    break; //For stopping the for loop
+                };
+
+            };
+
+            //For returning the ouput
+            return output;
+        },
+
+        //For defining the #&& function (shortcut of #and function)
+        "&&": function (...inputArray) {
+
+            //For storing the output using the #and function
+            let output = this['and'](...inputArray);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #or function
+        //#or will test each of its arguments , if any of its arguments is true then it will return true
+        "or": function (...inputArray) {
+
+            //Will be used for storing the output
+            let output = false; //The default value is set to false
+
+            //For testing each of the element of the inputArray
+            for (let i = 0; i <= (inputArray.length - 1); i++) {
+
+                //If any of its element 's value is true then the output will be set to true
+                output = (output || inputArray[i]);
+
+                //Once a output becomes a true, there is no need to continuing the for loop for testing.
+                //The for loop must be break
+                if (output === true) {
+                    break; //For stopping the for loop
+                };
+
+            };
+
+            //For returning the ouput
+            return output;
+        },
+
+        //For defining the #|| function (shortcut of #or function)
+        "||": function (...inputArray) {
+
+            //For storing the output using the #or function
+            let output = this['or'](...inputArray);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #not function
+        //#not will change 'true' value to a 'false' value and 'false' value to a 'true' value
+        "not": function (input) {
+
+            //For returning the ouput
+            return !(input);
+        },
+
+        //For defining the #! function (shortcut of #not function)
+        "!": function (input) {
+
+            //For storing the output using the #not function
+            let output = this['not'](input);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #greaterThan function
+        //#greaterThan will takes 2 parameters and compare if that the 1st parameter is greater than the second parameter or not
+        "greaterThan": function (fstVal, sndVal) {
+
+            //For comparing the 1st value with the 2nd vale and store it to the output value
+            let ouput = (fstVal > sndVal);
+
+            //For returning the ouput
+            return ouput;
+        },
+
+        //For defining the #> function (shortcut of #greaterThan function)
+        ">": function (input1, input2) {
+
+            //For storing the output using the #greaterThan function
+            let output = this['greaterThan'](input1, input2);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #lessThan function
+        //#lessThan will takes 2 parameters and compare if that the 1st parameter is less than the second parameter or not
+        "lessThan": function (fstVal, sndVal) {
+
+            //For comparing the 1st value with the 2nd vale and store it to the output value
+            let ouput = (fstVal < sndVal);
+
+            //For returning the ouput
+            return ouput;
+        },
+
+        //For defining the #< function (shortcut of #lessThan function)
+        "<": function (input1, input2) {
+
+            //For storing the output using the #lessThan function
+            let output = this['lessThan'](input1, input2);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #isEqual function
+        //#isEqual will takes 2 parameters and compare if that the both parameter is same numerical value or not
+        "isEqual": function (fstVal, sndVal) {
+
+            //For comparing the 1st value with the 2nd vale and store it to the output value
+            let ouput = (fstVal === sndVal);
+
+            //For returning the ouput
+            return ouput;
+        },
+
+        //For defining the #== function (shortcut of #isEqual function)
+        "==": function (input1, input2) {
+
+            //For storing the output using the #isEqual function
+            let output = this['isEqual'](input1, input2);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #greaterThanOrEqual function
+        //#greaterThanOrEqual will takes 2 parameters and compare if that the 1st parameter is greater than or
+        //equal to the second parameter or not
+        "greaterThanOrEqual": function (fstVal, sndVal) {
+
+            //For comparing the 1st value with the 2nd vale and store it to the output value
+            let ouput = (fstVal >= sndVal);
+
+            //For returning the ouput
+            return ouput;
+        },
+
+        //For defining the #>= function (shortcut of #greaterThanOrEqual function)
+        ">=": function (input1, input2) {
+
+            //For storing the output using the #greaterThanOrEqual function
+            let output = this['greaterThanOrEqual'](input1, input2);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #lessThanOrEqual function
+        //#lessThanOrEqual will takes 2 parameters and compare if that the 1st parameter is less than or
+        //equal to the second parameter or not
+        "lessThanOrEqual": function (fstVal, sndVal) {
+
+            //For comparing the 1st value with the 2nd vale and store it to the output value
+            let ouput = (fstVal <= sndVal);
+
+            //For returning the ouput
+            return ouput;
+        },
+
+        //For defining the #<= function (shortcut of #lessThanOrEqual function)
+        "<=": function (input1, input2) {
+
+            //For storing the output using the #lessThanOrEqual function
+            let output = this['lessThanOrEqual'](input1, input2);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #if function
+        //#if takes 3 parameters. 1st parameter is a condition parameter, if the condition is true then
+        //it returns 2nd parameter otherwise it returns 3rd parameter (if the 3rd parameter is not
+        //specified then its default value false will be return)
+        "if": function (condition, valueIftrue, valueIfFalse = false) {
+
+            //If the condition is true then the 2nd parameter will be returned
+            if (condition === true) {
+                //For returning the 2nd parameter
+                return valueIftrue;
+            }
+            //If the condition is false then the 3rd parameter will be returned
+            else if (condition === false) {
+                //For returning the 3rd parameter
+                return valueIfFalse;
+            }
+
+
+        }
+
+    }
+
+    //For storing user-defined functions
+    func_DB_extrnl = {
+
+    }
+
+    //This method will store user-defined function to the to the ViewPoint 's func_DB_extrnl
+    addFunc(name, funcCode) {
+
+        //For storing user defined function to the ViewPoint 's func_DB_extrnl
+        this.func_DB_intrnl[`${name}`] = funcCode;
+
+    }
+
+
     //This method will add external variable(s) to the ViewPoint 's variables_DB
     var(name, value) {
 
@@ -412,6 +663,255 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
                         current_token = ``;
                     }
 
+
+                }
+
+                //For handeling ViewPoint 's function (ViewPoint 's function must be started with "#" character (e.g. "#max(478 , 52)"))
+                else if (char === "#") {
+
+
+                    //Will be used for counting the matching opening and closing bracket / parentheses ("(" or ")")
+                    let bracktCount = 0;
+
+                    //Will be used for storing the name of the function (e.g. "#max(152, 625)" -> function name is "max")
+                    let funcName = "";
+
+                    //Will be used for storing current function argument
+                    let crntFuncArg = "";
+
+                    //Will be used for storing all function arguments in array format
+                    let funcArgArry = [];
+
+                    //For accessing the list of available built-in functions
+                    let lstOfBuiltInFunc = this.func_DB_intrnl;
+
+                    //For accessing the list of available built-in functions
+                    let lstOfExtrnalFunc = this.func_DB_extrnl;
+
+                    //Will be used for storing the output value of a function
+                    let funcOutput = 0;
+
+                    //Will be used for implementing quotation mode inside of ViewPoint 's function
+                    let quotModeInFunc = "";
+
+                    //For looping through each index of the expression string 
+                    while (index_of_expr <= (expr.length - 1)) {
+
+                        //For going to the next index of the expression string
+                        index_of_expr = index_of_expr + 1;
+
+                        //For getting the current character of the expression string using the current index value
+                        char = expr[index_of_expr];
+
+
+                        //If bracketCount variable 's value is 0, thats mean we are at the outermost level of a ViewPoint function.
+                        //Or we can say that the substring from the current position up to the first opening parenthesis ('(')
+                        //represents the function name. (e.g. in '#max(45, 85)' the function name "max" is located between index of
+                        //1 ('m' 's index) and 3 ('x' 's index).
+                        if (bracktCount === 0) {
+
+                            //If the current character is not a opening parenthesis ('('), then we can test and concatenate them to
+                            //get the function name
+                            if (char !== "(") {
+
+                                //For testing if the function name is valid or not:
+
+                                //If the current character is a space character then error message is needed to be thrown
+                                if (char === " ") {
+                                    //For throwing the error message
+                                    throw new Error("Funcion name can not have spaces (You can use The underscore character ('_') or camelCase for naming word separation");
+                                }
+
+                                //If the current character is a quotation (" , ' or `) character then error message is needed to be thrown
+                                else if ((char === "'") || (char === '"') || (char === "`")) {
+                                    //For throwing the error message
+                                    throw new Error("Funcion name can not have quotation character");
+                                }
+
+                                //If first character of the function name is a number (0-9) (Unicode value: 48 (for 0) to Unicode value: 57 (for 9)) or
+                                //a dot or decimal point (".") (Unicode value: 46), then a error message will be shown
+                                else if ((funcName === "") && (char.charCodeAt(0) === 46 || ((char.charCodeAt(0) >= 48) && (char.charCodeAt(0) <= 57)))) {
+                                    //For throwing error message
+                                    throw new Error("Function name can not start with a number (0-9) or a decimal point (.)")
+                                }
+
+                                //If all testing is done and if there is no error then the character sequences can be concatinated
+                                //for getting the function name
+                                else {
+                                    //For concating the character sequence for getting the function name
+                                    funcName += char;
+                                }
+                            }
+
+                            //If current character is a opening parenthesis ('('), then we need to incrementing the bracketCount variable value by 1
+                            //This will help to entering the second condition (i.e. when bracktCount variable is not equal to 0) in the next iteration
+                            else if (char === "(") {
+
+                                //For incrementing the bracketCount variable value by 1
+                                bracktCount = bracktCount + 1;
+
+                            }
+
+                        }
+
+                        //If the bracketCount value is equal or greater than 1, thats mean we have now entered the actual function arguments position of
+                        //the function. (e.g. "#functionName(something1, something2)" [we are in between "something1, something2)" 's index position)
+                        //(e.g. "#func1(100, #func2(4,5))" [we are in between "100, #func2(4,5))" 's index position)
+                        else if (bracktCount >= 1) {
+
+
+
+                            //For implementing quotation mode inside of function 's arguments
+                            //If the current character is a quotation character, then we need to test if quotation mode is already activated or not
+                            //(if already activated then quotModeInFunc variable will not be a empty string)
+                            if ((char === "'") || (char === '"') || (char === '`')) {
+
+                                //If quotModeInFunc is a empty string thats mean the quotation mode is not yet activated
+                                if (quotModeInFunc === '') {
+
+                                    //For enabling the quotation mode
+                                    quotModeInFunc = char;
+                                }
+
+                                //If quotModeInFunc is not empty, it means quotation mode was previously activated. In that case, we have to check
+                                //if the current quotation character matches the one quotation character that originally activated the quotation
+                                //mode or not.
+                                else if (quotModeInFunc !== "") {
+
+                                    //If the current quotation character matches the one quotation character that originally activated the quotation mode
+                                    if (quotModeInFunc === char) {
+
+                                        //For disabling the quotation mode by clearing the value of quotModeInFunc
+                                        quotModeInFunc = "";
+
+                                    }
+
+                                    //If the current quotation character does not match with the one quotation character that originally activated the quotation mode
+                                    else if (quotModeInFunc !== char) {
+                                        //Do nothing
+                                    }
+
+                                }
+                            };
+
+                            //If the quotation mode is disable
+                            if (quotModeInFunc === "") {
+
+                                //If the current character is a opening bracket / parentheses ("(")
+                                if (char === "(") {
+
+                                    //For incrementing the bracketCount variable value by 1
+                                    bracktCount = bracktCount + 1;
+
+                                }
+
+                                //If the current character is a closing bracket / parentheses (")")
+                                else if (char === ")") {
+
+                                    //For decrementing the bracketCount variable value by 1
+                                    bracktCount = bracktCount - 1;
+
+                                    //If bracktCount variable value is 0 after checking the closing parentheses (")"), thats mean
+                                    //the function has now ended.
+                                    if (bracktCount === 0) {
+
+                                        //For pushing current function argument value to the funcArgArry
+                                        funcArgArry.push(crntFuncArg);
+
+                                        //For clearing the current function argument value
+                                        crntFuncArg = "";
+
+                                        //For stopping the loop
+                                        break;
+
+                                        //Note: We have only stopped the function handeling loop, but the main expression handeling loop
+                                        //is still going and in next iteration that will continue after the index from where the
+                                        //ViewPoint 's function has been stopped (after the index from ")" character of the main expression)
+                                    }
+                                };
+
+                                //If the bracktCount variable value is 1 thats mean we are at the root position of the function
+                                if (bracktCount === 1) {
+
+                                    //For split all the function argument by the "," character (only when "," character is placed on the root position of the function
+                                    //(i.e when the bracktCount variable value is 1))
+                                    if (char === ",") {
+
+                                        //If crntFuncArg value is empty then a error messaage will be thrown
+                                        if (crntFuncArg === "") {
+                                            throw new Error(`Expected argument before the "," character in the function '#${funcName}'`);
+                                        }
+
+                                        else {
+                                            //For pushing current function argument value to the funcArgArry
+                                            funcArgArry.push(crntFuncArg);
+
+                                            //For clearing the current function argument value
+                                            crntFuncArg = "";
+                                        }
+                                    }
+
+                                    //For all others character
+                                    else {
+                                        //For concating the character sequence for getting the function argument
+                                        crntFuncArg += char;
+                                    }
+                                }
+
+                                //If the bracktCount variable value is greater than 1 thats mean we are inside of any expression which is inside the root function
+                                else if (bracktCount > 1) {
+                                    //For concating the character sequence for getting the function argument
+                                    crntFuncArg += char;
+                                };
+
+                            }
+
+                            //If the quotation mode is enable
+                            else if (quotModeInFunc !== "") {
+                                //For concating the current (quotation) character in the current function argument variable
+                                crntFuncArg += char;
+                            }
+                        };
+
+                    }
+
+
+                    //For looping through each element of the funcArgArry
+                    funcArgArry.forEach((elmVal, elmIndx) => {
+
+                        //For storing the evaluated value of the each element (each function argument expression) of funcArgArry
+                        funcArgArry[elmIndx] = this.evaluate(elmVal);
+
+                    })
+
+                    //If the current function is available in the built-in functions list
+                    if (funcName in lstOfBuiltInFunc) {
+
+                        //For calling that function with all the function arguments and storing the result in the funcOutput variable
+                        funcOutput = lstOfBuiltInFunc[funcName](...funcArgArry)
+
+                    }
+
+                    //If the current function is available in the external functions list
+                    else if (funcName in lstOfExtrnalFunc) {
+
+                        //For calling that function with all the function arguments and storing the result in the funcOutput variable
+                        funcOutput = lstOfExtrnalFunc[funcName](...funcArgArry)
+
+                    }
+
+                    //If the current function is not available in the both internal and the external functions list
+                    else {
+
+                        let msg = `The #${funcName}() function is not found in the internal or external functions list. To use #${funcName}() function you need to define it first`;
+
+                        //For throwing error message regarding unavailability of the current function
+                        throw new Error(msg);
+                    }
+
+
+                    //For pussing the function output value to the token array
+                    token.push(funcOutput);
 
                 }
 
@@ -682,4 +1182,5 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
     }
 
 }
+
 
