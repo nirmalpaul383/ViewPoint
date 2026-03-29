@@ -13,6 +13,10 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
      - Supports <ins>multiple datatypes</ins> e.g expressions with decimal / floating points numbers, BigInt, String, and Boolean datatype
 2. **<ins>Data Type Validation:</ins>**
      - Validates data types during expression evaluation, throwing errors for invalid operations (e.g., attempting sum or multiplication between strings and numbers).
+3. **<ins>Function(s) in the expression (added in v2.0.0): </ins>**
+     - Function(s) can be used in the expression string for complex expression computing (e.g. ```#and()``` function for using logical and to the expression or ```#if(condition, whatIfTrue, whatIfFalse)``` for using the 'if testing').
+     - It has various built-in function (e.g. ```#max()``` ,```#min()``` etc...)
+     - User can also add their own function using ```.addFunc( )``` method
 4. **<ins>Expression Tokenization:</ins>**
      - It can tokenize a mathematical expression into individual tokens and can return <ins> tokenized expression as an array</ins> (e.g expression = "5 + 7*2+(85^2+1)", token = [5,'+',7,'*',2,'+','(',85,'^',2,'+',1,')'])
 5. **<ins>Infix to Postfix Conversion:</ins>**
@@ -80,9 +84,119 @@ console.log(ViewPoint_obj.evaluate(`45 * true`)); //Throws a datatype error
 
 //Invalid Expression: unclosed quoted text
 console.log(ViewPoint_obj.evaluate(`"Hello World `)); //Throws a error message for unclosed quoted text
+
 ```
 
 ## Other usages and methods
++ ### Using the ```#function()``` in the expression (added in v2.0.0)
+#### Using the built-in function in the expression using ```#``` character:
+
+```javascript
+//Create a new expression evaluator object with ViewPoint class
+let VP_Obj = new ViewPoint();
+
+//Example 1:
+
+//Expression 1 (simple expression with multiple layer of brackets and #max function):
+//ViewPoint 's function must be started with "#" character
+let expr1 = "2*(500-4*(25+ #max(8, (2*6))+45)) +39";
+
+//Output to the console
+console.log(VP_Obj.evaluate(expr1)); //Output 383
+
+
+
+//Example 2:
+
+//For creating 3 variables in our ViewPoint object
+VP_Obj.var("Eng", 45); //Marks for english subject
+VP_Obj.var("Math", 85); //Marks for math subject
+VP_Obj.var("FA", 55); //Marks for financial accounting subject
+
+VP_Obj.var("Pass", 35); //Passmark
+
+//Expression 2 with advance function like #and and #if
+let expr2 = "#if(#and(#>=(Eng,Pass) , #>=(Math,Pass), #>=(FA,Pass)), 'All Cleared', 'Fail')";
+
+//Output to the console
+console.log(VP_Obj.evaluate(expr2)); //Output 'All Cleared'
+```
+#### User can also defined their own function using ```.addFunc()``` method:
+
+```javascript
+//Create a new expression evaluator object with ViewPoint class
+let VP_Obj = new ViewPoint();
+
+//Example 1: adding 'sin()' function using JavaScript 's native Math object
+
+//For defining and storing user-defining function to the ViewPoint object
+VP_Obj.addFunc("sin", (input)=>{return Math.sin(input)});
+
+//Using the custom function in expression
+let expr3 = "4+ #sin(45) + 8"
+
+//Output to the console
+console.log(VP_Obj.evaluate(expr3)) //Output 12.8509....
+
+
+
+//Example 2: adding 'greet()' function which return "Hello!" string
+//For defining and storing user-defining function to the ViewPoint object
+VP_Obj.addFunc("greet", ()=>{return "Hello!"})
+
+//For defining and storing user-defining function to the ViewPoint object
+VP_Obj.addFunc("myName", (name)=>{return String(name)})
+
+//Using our custom function in expression
+let expr4 = "#greet() + ` ` + #myName('Nirmal') " ;
+
+//Output to the console
+console.log(VP_Obj.evaluate(expr4)) //Output 'Hello! Nirmal'
+
+
+//Example 3: adding 'am_I_Allowed_For_Driving' function which return message based on the age value
+//For defining and storing user-defining function to the ViewPoint object
+VP_Obj.addFunc("am_I_Allowed_For_Driving", (age) => {
+    
+    if (typeof ((age) === "number") && (isNaN(age) === false)) {
+
+        if (age < 0) {
+            return "Age can not be a negative number"
+        }
+        else if (age < 18) {
+            return "You are under 18 years so you are not allowed for driving !!!";
+        }
+        else {
+            return "Congratulations! You can drive";
+        }
+    }
+    else {
+        return "Please enter a valid age"
+    }
+});
+
+//Using our custom function in expression and output to the console
+console.log(VP_Obj.evaluate("#am_I_Allowed_For_Driving(4)")) //Output "You are under 18 years so you are not allowed for driving !!!"
+console.log(VP_Obj.evaluate("#am_I_Allowed_For_Driving(21)")) //Output "You are under 18 years so you are not allowed for driving !!!"
+
+
+```
+
+#### ViewPoint 's built-in functions list:
+ViewPoint has some built-in functions, here is a complete list
+|  Function Name | Details | Example |
+| - | - |- |
+|**#max**| #max() function returns the largest number of the provided numerical arguments | ```"#max(45,50,20, 4+9*(6+4))" //returns 94 ```|
+|**#min**| #min() function returns the smallest number of the provided numerical arguments | ```"#min(45,50,20, 4+9*(6+4))" //returns 20 ```|
+|**#and** <br> or <br> **#&&**| **#and()** or **#&&** tests each of its arguments , if all are true then it will return true | ```"#and(true , true, false)" //returns false ``` <br> <br> ```"#&&(true , true, false)" //returns false ```|
+|**#or** <br> or <br> **#\|\|** | **#or()** or **#\|\|()** tests each of its arguments , if any of its arguments is true then it will return true | ```"#or(true , true, false)" //returns true ``` <br> <br> ```"#\|\|(true , true, false)" //returns true```|
+|**#not** <br> or <br> **#!**| **#not()** or **#!()** changes 'true' value to a 'false' value and 'false' value to a 'true' value | ```"#not(true)" //returns false ``` <br> <br> ```"#!(true)" //returns false ``` |
+|**#greaterThan** <br> or <br> **#>**| **#greaterThan()** or **#>()** takes 2 parameters and compare if that the 1st parameter is greater than the second parameter or not | ```"#greaterThan(67 , 5)" //returns true ``` <br> <br>```"#>(67 , 5)" //returns true ``` |
+|**#lessThan** <br> or <br> **#<**| **#lessThan()** or **#<()** takes 2 parameters and compare if that the 1st parameter is less than the second parameter or not | ```"#lessThan(67 , 5)" //returns false ``` <br> <br>```"#<(67 , 5)" //returns false ``` |
+|**#isEqual** <br> or <br> **#==**| **#isEqual()** or **#==()** takes 2 parameters and compare if that the both parameter is same numerical value or not | ```"#isEqual(60 , 50+10)" //returns true ``` <br> <br>```"#==(60 , 50+10)" //returns true ``` |
+|**#if**| **#if()** takes 3 parameters. 1st parameter is a condition parameter, if the condition is true then it returns 2nd parameter otherwise it returns 3rd parameter (if the 3rd parameter is not specified then its default value false will be return) | ```"#if(true , 5, 80)" //returns 80 ``` <br> <br> ```"#if(#<(50,100) , '50 is less than 100', '100 is less than 50')" //returns '50 is less than 100' ```|
+
+
 + ### Expression Tokenization using ```.tokenize()``` method
 ```Javascript
 //Create a new ViewPoint object with the viewpoint class
@@ -207,7 +321,7 @@ console.log(output); //Output: 8 (multiplication ('*') operator works as multipl
 //For output the re-evaluating result (multiplication ('*') operator works as addition ('+'))
 console.log(output2); //Output: 6
 ```
-## ```ViewPoint_math_def```:
+#### ```ViewPoint_math_def```:
 This object is used for defining of some basic math logic and math operations for ViewPoint
 |  Name | Type | Details |
 | - | - |- |
