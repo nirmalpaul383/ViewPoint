@@ -1,0 +1,49 @@
+{
+  "name": "viewpoint-js",
+  "version": "2.0.0",
+  "description": "A powerful math expression parser and evaluator with runtime data-type checking",
+  "type": "module",
+  "main": "dist/viewpoint.cjs.js",
+  "module": "dist/viewpoint.esm.js",
+  "browser": "dist/viewpoint.umd.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "rollup -c",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "dev": "nodemon src/index.js"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*.js"
+    ]
+  },
+  "keywords": [
+    "math",
+    "parser",
+    "expression",
+    "evaluator",
+    "calculator",
+    "javascript"
+  ],
+  "author": "Nirmal Paul",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nirmalpaul383/ViewPoint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nirmalpaul383/ViewPoint/issues"
+  },
+  "homepage": "https://github.com/nirmalpaul383/ViewPoint#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.24.0",
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "nodemon": "^3.0.0",
+    "@rollup/plugin-commonjs": "^23.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "jest": "^29.0.0"
+  }
+}
