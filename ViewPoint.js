@@ -75,13 +75,12 @@ class ViewPoint {
         character_def: {
 
             //Supported number characters
-            //0 to 9 or "n" or "."
-            //Note: "n" character is used in BigInt data type
+            //0 to 9 or "."
             //or and '.' character is used as a decimal point
             num: [
                 '0', '1', '2', '3',
                 '4', '5', '6', '7',
-                '8', '9', '.', 'n'
+                '8', '9', '.'
             ],
 
             //Supported operator characters
@@ -1452,12 +1451,6 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                         token_type = 'name';
                     }
 
-                    //If current character is 'n' and previous character of 'n' is not a number from 0-9,
-                    //thats mean the current character 'n' is working as 'name' (instead of 'number')
-                    if (char === 'n' && !(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(expr[index_of_expr - 1]))) {
-                        token_type = 'name';
-                    }
-
                 }
 
                 //If the current character is a alphabetic character
@@ -1465,6 +1458,12 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
                     //For storing the token type value after checking the current character
                     token_type = 'name';
+
+                    //If the current character is 'n' and previous character of 'n' is a number from 0-9,
+                    //thats mean the current character 'n' is working as 'number' (instead of 'name')
+                    if (char === 'n' && (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(expr[index_of_expr - 1]))) {
+                        token_type = 'number';
+                    }
 
                 }
 
@@ -1745,6 +1744,8 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
                     }
 
+
+
                     //If the current function is available in the user-defined inline functions list
                     else if (funcName in lstOfInlineFunc) {
 
@@ -1819,11 +1820,22 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                                     else {
 
                                         //For looping through each argument of the 'rest' paramater 's argument list
-                                        parmToArg['rest'].forEach((crtArg) => {
+                                        parmToArg['rest'].forEach((crtArg, crtArgIndx) => {
 
                                             //For parameters 's substitute processing:
                                             //For pushing the each actual value (function 's argument) to the temp_funcTkns array
                                             temp_funcTkns.push(crtArg);
+
+
+                                            //For pushing a coma (',') character in between the previously pushed rest 's argument values
+                                            //except for the last one.
+                                            //If the crtArgIndx is not the last element 's index 
+                                            if (crtArgIndx !== ((parmToArg['rest'].length) - 1)) {
+
+                                                //For pushing a coma (',') character in the temp_funcTkns array
+                                                temp_funcTkns.push(',');
+
+                                            }
 
                                         })
 
@@ -1834,7 +1846,6 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                                 else {
                                     temp_funcTkns.push(funcTknVal);
                                 }
-
 
 
                             }
@@ -1848,8 +1859,10 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                             //value to the arguments value) to funcTkns for evaluating
                             funcTkns = temp_funcTkns;
 
+                            console.log(funcTkns)
+
                             //For refining the funcTkns array and stores it back to the funcTkns array
-                            funcTkns = this.refine(...funcTkns)
+                            funcTkns = this.refine(...funcTkns);
 
                             //For converting and storing the infix expression array to its equivalent postfix expression array
                             let postFix_expr_arry = this.infix_to_postfix(...funcTkns);
@@ -2666,6 +2679,13 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                 //Pop the value from top of the expression stack, and store it as the first operand
                 let frst_value = expr_stack.pop();
 
+                //If the second value or the first value is undefined, thats mean the expression is invalid
+                //and likely contains a missing operand(s)
+                if ((secnd_value === undefined) || (frst_value === undefined)) {
+                    //For throwing the error regarding invalid expression
+                    throw new Error(`Invalid expression: Missing operands detected in the expression`);
+                }
+
                 //For exponential / power operator (^) or (**)
                 if (ele_value === '^' || ele_value === "**") {
 
@@ -2776,12 +2796,22 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
 
         }
 
-        //For poping the value from the expression array and storing it into the output variable
-        let output = expr_stack.pop();
+        //If exactly one value remains on the stack, thats mean the expression was evaluated successfully
+        if (expr_stack.length === 1) {
 
-        //For returning the output value
-        return output;
+            //For poping the value from the expression array and storing it into the output variable
+            let output = expr_stack.pop();
 
+            //For returning the output value
+            return output;
+        }
+        //If there is more than one element in the expr_stack array, thats mean the expression was
+        //invalid and likely contains a missing operator
+        else if ((expr_stack.length) > 1) {
+
+            //For throwing the error regarding missing operator
+            throw new Error(`Invalid expression: Missing operator detected in the expression`);
+        }
 
     }
 
@@ -2926,8 +2956,6 @@ Error in line number: ${lineCount}`)
     }
 
 }
-
-
 
 
 

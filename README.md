@@ -5,6 +5,11 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
 ![ViewPoint Screenshot:](https://raw.githubusercontent.com/nirmalpaul383/ViewPoint/refs/heads/main/Screenshots/Screenshot%201.jpg)
 
 ## What's new
+  - ### v2.1.1
+      1. <ins>Bug fixed related to the `rest` keyword:</ins> Fixed an issue where only the last argument of a rest parameter was processed during function evaluation.
+      2. <ins>Bug fixed related to missing operator detection:</ins> ViewPoint now throws a missing operators error if the operator is missing in the expression (e.g. `25 30` will throw an error).
+      3. <ins>Bug fixed related to missing operand detection:</ins> Fixed an issue where operators without operands (e.g. `/ +`) produced a data type error. The ViewPoint now reports regarding the missing operand error.
+      4. <ins> Bug fixed for variable names beginning with the character `n`:</ins> Fixed an issue where variable names beginning with `n` could evaluate incorrectly.
   - ### v2.1.0
       1. Improved the `.tokenize()` method to support more complex infix expressions and advanced calculations more accurately
       2. Added support for more operators:
