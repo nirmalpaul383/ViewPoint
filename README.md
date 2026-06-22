@@ -4,7 +4,95 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
 ## ViewPoint example usage screenshot:
 ![ViewPoint Screenshot:](https://raw.githubusercontent.com/nirmalpaul383/ViewPoint/refs/heads/main/Screenshots/Screenshot%201.jpg)
 
+## Tables of Contents
+- [What's new](#whats-new)
+  - [v2.1.2](#v212)
+  - [v2.1.1](#v211)
+  - [v2.1.0](#v210)
+  - [v2.1.0](#v210)
+  - [v2.0.0](#v200)
+  - [v1.0.1](#v101)
+  - [v1.0.0](#v100)
+- [Features](#features)
+- [How to include <b>ViewPoint</b> in your project ?](#how-to-include-this-library-in-your-project)
+- [How to use <b>ViewPoint</b> ?](#how-to-use-this-library)
+- [Expression evaluation modes](#expression-evaluation)
+  - [`.evaluate()` mode](#1-single-expression-evaluation)
+  - [`.interpret()` mode](#2-multiple-expression-evaluation)
+- [Supported operators](#operators)
+- [Functions and Variables](#functions-and-variables)
+  - [Functions](#functions)
+    - [Using a function in expression](#using-the-function-in-the-expression)
+    - [Defining a custom function](#function-definations)
+      - [Using the `.addFunc()` Method (External Function Definition)](#function-defination-using-external-way-using-addfunc-method)
+      - [Using the `func` Keyword (Inline Function Definition)](#function-defination-directly-in-the-expression-in-line-expression-way-using-func-keyword)
+     - [Built-in functions](#viewpoint-s-built-in-functions-list)
+       - [Basic math and number related functions](#basic-math-and-number-related-functions)
+       - [Power & Root functions](#power--root-functions)
+       - [Logarithmic functions](#logarithmic-functions)
+       - [Exponential functions](#exponential-functions)
+       - [Trigonometry (angle value in radian) related functions](#trigonometry-angle-value-in-radian-related-functions)
+       - [Hyperbolic functions](#hyperbolic-functions)
+       - [Comparison functions](#comparison-functions)
+       - [Logical functions](#logical-functions)
+       - [Bitwise functions](#bitwise-functions)
+       - [Statistical functions](#statistical-functions)
+       - [Constants](#constants)
+       - [String functions](#string-functions)
+       - [Miscellaneous functions](#miscellaneous-functions)
+  - [Variables](#variables)
+    - [Using <ins>JavaScript variables</ins> in the expression](#using-javascript-variable-directly-in-the-expression-using--and-)
+    - [Using <ins>ViewPoint 's variable</ins> (defined using external method) in the expression](#using--viewpoint-s-variable-in-the-expression-defined-using-external-way-var-name-value-method)
+    - [Using <ins>ViewPoint 's variable</ins> (defined directly in expression) in the expression](#using--viewpoint-s-variable-in-the-expression-defined-directly-using-in-line-expression-way-with-assignment-operators)
+      - [In-line variable assignment operators](#assignment-operators-in-the-viewpoint)
+ - [Keywords in ViewPoint](#keywords)
+ - [Other methods and properties of ViewPoint](#other-useful-usages-and-methods)
+   - [`.tokenize()` method](#expression-tokenization-using-tokenize-method)
+   - [`.infix_to_postfix()` method](#infix-to-postfix-conversion-using-infix_to_postfix-method)
+   - [`.ViewPoint_math_def.operator_precedence` property](#changing-the-default-operator-precedence--using-viewpoint_math_defoperator_precedence-property)
+   - [`.ViewPoint_math_def` object](#changing-the-default-behavior-of-a-operator-using-viewpoint_math_defmethod_name)
+- [License](#license)
+- [Thanks](#thanks)
+
 ## What's new
+  - ### v2.1.2
+      1. Added support for scientific (exponential) number notation as input, such as `15e2`, `18e+4`, and `20e-5`.
+      2. Fixed an issue where console.log() was executed whenever an inline function was evaluated. The leftover testing code (`console.log(...)`) has been removed from the release version. Sorry for any inconvenience caused.
+      3. Fixed the behavior of the Bitwise AND (`&`), Bitwise OR (`|`) and Unary NOT (`!`) operators.
+      4. Added the `isNotEqual()` or `!=()` function.
+      5. Added the `fract ()` function.
+      6. Added the `prod(...)` function, which returns the multiplication of all supplied parameters.
+      7. Added additional trigonometric functions:
+         - `csc()` : Cosecant
+         - `sec()` : Secant
+         - `cot()` : Cotangent
+      8. Added additional hyperbolic functions:
+         - `csch()` : Hyperbolic Cosecant
+         - `sech()` : Hyperbolic Secant
+         - `coth()` : Hyperbolic Cotangent
+      9. Added the following string manipulation functions:
+         - `strLen()`
+         - `strUpper()`
+         - `strLower()`
+         - `strTrim()`
+         - `strIncludes()`
+         - `strStartsWith()`
+         - `strEndsWith()`
+         - `strIndexOf()`
+         - `strSubStr()`
+         - `strRepeat()`
+         - `strReplace()`
+         - `strReplaceAll()`
+      10. Added the following bitwise operation functions:
+         - `bitAnd()` or `&()`
+         - `bitOr()` or `|()`
+         - `bitXor()` or `^()`
+         - `bitNot()` or `~()`
+         - `bitLShift()` or `<<()`
+         - `bitRShift()` or `>>()`
+         - `bitURShift()` or `>>>()`
+      11. Added the `vpVer()` function for getting information about the current ViewPoint version.
+      12. Improved error handling by categorizing errors into specific types. Previously, all errors were reported simply as `Error`; errors are now categorized as `TypeError` , `SyntaxError` , `Error` (for generic errors)
   - ### v2.1.1
       1. <ins>Bug fixed related to the `rest` keyword:</ins> Fixed an issue where only the last argument of a rest parameter was processed during function evaluation.
       2. <ins>Bug fixed related to missing operator detection:</ins> ViewPoint now throws a missing operators error if the operator is missing in the expression (e.g. `25 30` will throw an error).
@@ -58,7 +146,7 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
       1. Fixed calculation issues for BigInt datatypes.
       2. Error message for unclosed quoted text is fixed.
 
-  - ## v1.0.0
+  - ### v1.0.0
       1. Supports for basic arithmetic operators (`+`, `-`, `*`, `/`,`^`, `%`).
       2. Supports string concatination operator (`+`).
       3. Supports nested math expression. (e.g `(52/8+2)+56*((25/2)*4+(8-2))`)
@@ -66,7 +154,10 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
       5. Supports runtime data-type checking.
       6. Support for defination of variables using external way (using `.var()` method).
       7. Support for custom order of operations (default is `PEMDAS`).
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
 
+---
 ## Features
 1. **<ins>Expression Evaluation:</ins>**
      - <ins>Parses and evaluates</ins> mathematical expressions like '5*52+285/2'
@@ -107,26 +198,33 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
 9. **<ins>Customizable Operator Behavior:</ins>**
      - Allows users to <ins>re-define the math operator (e.g. '*' or '%') behavior</ins> to suit specific requirements (if needed)
   
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
+
+---
 ## How to include this library in your project?
 To use this evaluator/library, firstly, you need to link **ViewPoint.js** to your project. You can do that by using two ways:
 1. **Download/Clone and Use:** Download or clone the repository and use the **ViewPoint.js** file in your project.
 2. **Use via CDN:**
      - Use the library directly via CDN using the following script tag: ```https://cdn.jsdelivr.net/gh/nirmalpaul383/ViewPoint/ViewPoint.js```
      - For using it in browser/webpage you can use ```<script src="https://cdn.jsdelivr.net/gh/nirmalpaul383/ViewPoint/ViewPoint.js"></script>```
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
 
+---
 ## How to use this library?
-### After including this library, you will need to:
-+ **<ins>create a ViewPoint object </ins> using ` new ViewPoint() ` keywords:**
+After including this library, you will need to:
++ create a ViewPoint object using ` new ViewPoint() ` keywords:
 ```JavaScript
 //Create a new ViewPoint object with ViewPoint class
 let ViewPoint_obj = new ViewPoint();
 ```
-+ **<ins>Store your expression in string format:</ins>**
++ Store your expression in string format:
 ```JavaScript
 //Sample Expression
 const expresion = `((52/8+2)+56*((25/2)*4+(8-2)))*2`;
 ```
-+ **<ins>For evaluating an expression use ```.evaluate()``` method:</ins>**
++ For evaluating an expression use ```.evaluate()``` method:
 ```JavaScript
 //Expression evaluating
 let output = ViewPoint_obj.evaluate(expresion);
@@ -134,7 +232,7 @@ let output = ViewPoint_obj.evaluate(expresion);
 //For output
 console.log(output); //Output 6289 to the console
 ```
-+ **<ins>For interpreting multiple expressions use ```.interpret()``` method:</ins>**
++ For interpreting multiple expressions use ```.interpret()``` method:
 ```JavaScript
 let multipleExpr = `5+5
 a = 45
@@ -150,11 +248,14 @@ let output = ViewPoint_obj.interpret(expresion);
 //For output
 console.log(output); //Output [ 10, 45, 50, "The 'area(l,w)' was registered.", 2000, -10 ] to the console
 ```
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
 
+---
 ## Expression evaluation
-### ViewPoint supports two types of evalutaion mode:
-+ ### Single expression evaluation:
-  `.evaluate()` method evaluates a expression represented as a string and returns the calculated result 
+ViewPoint supports <ins>two types</ins> of evalutaion mode:
+### 1. Single expression evaluation:
+`.evaluate()` method evaluates a expression represented as a string and returns the calculated result 
 ```javascript
 //Create a new ViewPoint object with ViewPoint class
 let ViewPoint_obj = new ViewPoint();
@@ -188,7 +289,7 @@ console.log(ViewPoint_obj.evaluate(`45 * true`)); //Throws a datatype error
 console.log(ViewPoint_obj.evaluate(`"Hello World `)); //Throws a error message for unclosed quoted text
 
 ```
-+ ### Multiple expression evaluation:
+### 2. Multiple expression evaluation:
 `.interpret()` method interprets and executes one or more expressions/statements represented as a string and returns the calculated results as an array format
 ```javascript
 //Create a new ViewPoint object with ViewPoint class
@@ -216,9 +317,45 @@ console.log(ViewPoint_obj.interpret(multipleExpr));
 
 
 ```
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
+
+---
+## Operators
+ViewPoint supports a wide range of operators for mathematical, logical, and other operations. Here is complete reference:
+|Type |Operator |Default precedence|Details |Example |
+|-|-|-|-|-|
+|Unary Operator|`+`|Highest|Indicates a positive value|`+25 *2` returns `50`|
+|Unary Operator|`-`|Highest|Indicates a negative value|`-25 *2` returns `-50`|
+|Arithmetic Operator|`^` or `**`|11|calculates a base number raised to the power of an exponent| `2 ** 3` returns `8`|
+|Arithmetic Operator|`*`|10|Multiplies two operands| `2 * 3` returns `6`|
+|Arithmetic Operator|`/`|9|Multiplies two operands| `6 / 3` returns `2`|
+|Arithmetic Operator|`%`|9|Returns the remainder after division.| `7 % 3` returns `1`|
+|Arithmetic Operator|`+`|8|Adds two numbers or concatenates two strings.| `7 +3 ` returns `10` <br> <br>`"Hello " + "Word"` returns `'Hello word'`|
+|Arithmetic Operator|`-`|8|Subtracts the right operand from the left operand.| `7 - 3` returns `4`|
+|Comparison Operator|`<`|7|Returns true if the left operand is less than the right operand, otherwise returns false.| `3 < 7` returns `true`|
+|Comparison Operator|`>`|7|Returns true if the left operand is greater than the right operand, otherwise returns false.| `8 < 5` returns `true`|
+|Comparison Operator|`<=`|7|Returns true if the left operand is less than or equal to the right operand, otherwise returns false.| `10 <= 50` returns `true`|
+|Comparison Operator|`>=`|7|Returns true if the left operand is greater than or equal to the right operand, otherwise returns false.| `100 >= 50` returns `true`|
+|Comparison Operator|`==`|6|Returns true if both operands are equal, otherwise returns false.| `100 == 100` returns `true`|
+|Comparison Operator|`!=`|6|Returns true if both operands are not equal, otherwise returns false.| `100 != 50` returns `true`|
+|Bitwise Operator|`&`|5|Performs a bitwise AND operation on two operands.| `5 & 3` returns `1`|
+|Bitwise Operator|`\|`|4|Performs a bitwise OR operation on two operands.| `5 \| 3` returns `7`|
+|Logical Operator|`&&`|3|Returns true if both operands are true, otherwise returns false.| `true && true` returns `true`|
+|Logical Operator|`\|\|`|2|Returns true if any of one operand is true, otherwise returns false.| `true \|\| false` returns `true`|
+|Assignment operators|`=` <br> `+=` <br> `-=` <br> `*=` <br> `/=`|1|Performs in-line variable assignment.|[Explore ViewPoint 's variable assignment operators and their usage.](#assignment-operators-in-the-viewpoint)|
+|New line operators|`\n` <br> `\r` <br> `;`|0|Separates multiple expressions in [.interpret (...) mode](#2-multiple-expression-evaluation)|`"1st string" ; "2nd string" \n "3rd string"` returns `['1st string', '2nd string', '3rd string']`|
+|Comment Operator|`//`|Not Applicable|Starts a single-line comment. Everything after it on the same line is ignored.|`16+4 //This is 1st comment ; 21+5 //This is 2nd comment` returns `[ 20, 26 ]`|
+|Ternary Operator|`(cond) ? (what_to_do_if_true) : (what_to_do_if_false)`|Not Applicable|If the codition is true then the `what_to_do_if_true` is evaluated otherwise the `what_to_do_if_false` is evaluated|`45 > 8*5 ? "Yes" : "No"` returns `true`|
+|Unary Operator|`!`|Not Applicable|Returns `false` if the operand is true and returns `true` if the operand is false|`! true` returns `false` <br><br> `! false` returns `true`|
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
+
+---
 
 ## Functions and Variables
 ### Functions(...):
+Functions are reusable blocks of code / expression which can be used for performing mathematical calculations, string manipulation, logical operations, and other operations.
 #### Using the function in the expression:
 
 ```javascript
@@ -251,7 +388,7 @@ let expr2 = "if(and(Eng >= Pass , Math >= Pass, FA >= Pass), 'All Cleared', 'Fai
 console.log(VP_Obj.evaluate(expr2)); //Output 'All Cleared'
 ```
 #### Function definations:
-  - Function defination using <ins>external way</ins> (using ```.addFunc()``` method):
+##### Function defination using <ins>external way</ins> (using `.addFunc()` method):
 ```javascript
 //Create a new expression evaluator object with ViewPoint class
 let VP_Obj = new ViewPoint();
@@ -271,7 +408,7 @@ let expr4 = "greet() + ` ` + myName('Nirmal') " ;
 //Output to the console
 console.log(VP_Obj.evaluate(expr4)) //Output 'Hello! Nirmal'
 ```
-  - Function defination directly in the expression (<ins>in-line expression way</ins>) (using ```func``` keyword):
+##### Function defination directly in the expression (<ins>in-line expression way</ins>) (using ```func``` keyword):
 ```javascript
 
 //Function defination using in-line expression way (using the 'func' keyword):
@@ -290,31 +427,143 @@ console.log(VP_Obj.evaluate('area(11,21)')) //Output 231
 ```
 
 #### ViewPoint 's built-in functions list:
-ViewPoint has some built-in functions, here is a complete list
-|  Function Name | Details | Example |
-| - | - |- |
-|**and** <br> or <br> **&&**| **and()** or **&&** tests each of its arguments , if all are true then it will return true | ```"and(true , true, false)" //returns false ``` <br> <br> ```"&&(true , true, false)" //returns false ```|
-|**or** <br> or <br> **\|\|** | **or()** or **\|\|()** tests each of its arguments , if any of its arguments is true then it will return true | ```"or(true , true, false)" //returns true ``` <br> <br> ```"\|\|(true , true, false)" //returns true```|
-|**not** <br> or <br> **!**| **not()** or **!()** changes 'true' value to a 'false' value and 'false' value to a 'true' value | ```"not(true)" //returns false ``` <br> <br> ```"!(true)" //returns false ``` |
-|**greaterThan** <br> or <br> **>**| **#greaterThan()** or **>()** takes 2 parameters and compare if that the 1st parameter is greater than the second parameter or not | ```"greaterThan(67 , 5)" //returns true ``` <br> <br>```">(67 , 5)" //returns true ``` |
-|**lessThan** <br> or <br> **<**| **lessThan()** or **<()** takes 2 parameters and compare if that the 1st parameter is less than the second parameter or not | ```"lessThan(67 , 5)" //returns false ``` <br> <br>```"<(67 , 5)" //returns false ``` |
-|**isEqual** <br> or <br> **==**| **isEqual()** or **==()** takes 2 parameters and compare if that the both parameter is same numerical value or not | ```"isEqual(60 , 50+10)" //returns true ``` <br> <br>```"==(60 , 50+10)" //returns true ``` |
-|**if**| **if()** takes 3 parameters. 1st parameter is a condition parameter, if the condition is true then it returns 2nd parameter otherwise it returns 3rd parameter (if the 3rd parameter is not specified then its default value false will be return) | ```"if(true , 5, 80)" //returns 80 ``` <br> <br> ```"if(50 < 100 , '50 is less than 100', '100 is less than 50')" //returns '50 is less than 100' ```|
-|**string**|**string()** takes the data and returns its string form| ```"string(20) + '26'" //returns '2026'```| 
-|**typeof**|**typeof()** takes data as its input parameter and returns the data type of that parameter | ```"typeof(67)" //returns 'number'``` <br> ```"typeof(max)" //returns 'function'```
-|**Const**| **Const()** function takes the name of Constant (in string format) and returns the result by calling the corresponding Math object 's property / constant name | ```"Const(PI)" //returns 3.141592653589793``` <br> <br>```"Const(SQRT2)" ///returns 1.4142135623730951```|
-|**degToRad**| **degToRad()** function takes input in degree form and returns the output in radian form| ```"tan(degToRad(45))" //returns 1```|
-|**sum**| **sum()** function returns the sum of all provided parameters| ```"sum(40,10,200,500,100)" //returns 850```|
-|**count**| **count()** function returns the total numbers of the given parameters| ```"count(40,10,200,500,100)" //returns 5```|
-|**avg**| **avg()** function returns the average value of the given parameters| ```"avg(40,10,200,500,100)" //returns 170```|
+ViewPoint provides 85+ built-in functions for performing various operations, ranging from mathematical calculations to string manipulation, bitwise operations to logical operations and more. ViewPoint has all functions from JavaScript's `Math` object, as well as several additional native functions provided by ViewPoint.
+<br> <br> The complete list of available functions is shown below:
+##### Basic math and number related functions:
+| Function Name | Details | Example|
+|-|-|-|
+| `abs (x)` | Returns the absolute value of a number. | `abs (-5)` returns  `5` |
+| `sign (x)` | Returns `-1` for negetive number, `0` for zero and `1` for positive number. | `sign (-45)` returns  `-1` |
+| `ceil (x)` | Returns the number rounded up to the nearest integer | `ceil (45.43)` returns  `46` |
+| `floor (x)` | Returns the number rounded down to the nearest integer | `floor (45.43)` returns  `45` |
+| `round (x)` | Returns the number rounded (up / down) to the nearest integer | `round (45.43)` returns  `45` |
+| `trunc (x)` | Returns the number with the fractional part removed. | `trunc (53.75)` returns  `53` |
+| `fract (x)` | returns the fractional part of the provided number by removing the integer part of that number. | `fract (53.75)` returns  `0.75` |
+##### Power & Root functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`pow (x, y)` | Returns the value of x raised to the power of y. | `pow(5,3)` returns `125`|
+|`sqrt (x)` | Returns the square root of a number. | `sqrt(144)` returns `12`|
+|`cbrt (x)` | Returns the cube root of a number. | `cbrt(125)` returns `5`|
+|`hypot (x, y, ...)` | Returns the square root of the sum of squares of its arguments. | `hypot(3, 4)` returns `5`|
+##### Logarithmic functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`log (x)`| Returns the natural logarithm (base e). | `log(Const(E))` returns `1`|
+|`log10 (x)`| Returns the base 10 logarithm. | `log10(100)` returns `2`|
+|`log2 (x)`| Returns the base 2 logarithm. | `log2(8)` returns `3`|
+|`log1p (x)`| Returns the natural logarithm of (1 + x), computed accurately for small values. | `log1p(1)` returns `0.6931471805599453`|
+##### Exponential functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`exp (x)`| Returns Euler's number `e` raised to the power of x | `exp(0)` returns `1`|
+|`expm1 (x)`| Returns Euler's number `e` raised to the power of x, minus one. | `expm1(0)` returns `0`|
+##### Trigonometry (angle value in radian) related functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`sin (x)`| Returns the sine (ratio) of an angle (radians). | `sin(0)` returns `0`|
+|`cos (x)`| Returns the cosine (ratio) of an angle (radians). | `cos(0)` returns `1`|
+|`tan (x)`| Returns the tangent (ratio) of an angle (radians). | `tan(0)` returns `0`|
+|`csc (x)`| Returns the cosecant (reciprocal sine ratio) of an angle (radians). (i.e. `1/sin(x)`) | `csc(Const('PI')/2)` returns `1`|
+|`sec (x)`| Returns the secant (reciprocal cosine ratio) of an angle (radians). (i.e. `1/cos(x)`) | `sec(0)` returns `1`|
+|`cot (x)`| Returns the cotangent (reciprocal tangent ratio) of an angle (radians). (i.e. `1/tan(x)`) | `cot(Const('PI')/4)` returns `1`|
+|`asin (x)`| Returns the the angle (radians) whose sine is x | `asin(0)` returns `0`|
+|`acos (x)`| Returns the the angle (radians) whose cosine is x | `acos(1)` returns `0`|
+|`atan (x)`| Returns the the angle (radians) whose tangent is x  | `atan(0)` returns `0`|
+|`atan2 (y,x)`| Returns the arctangent of the quotient of its arguments, using the signs of both arguments to determine the correct quadrant. | `atan2(0, 1)` returns `0`|
+##### Hyperbolic functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`sinh (x)`| Returns the hyperbolic sine of a number. | `sin(0)` returns `0`|
+|`cosh (x)`| Returns the hyperbolic cosine of a number. | `cosh(0)` returns `1`|
+|`tanh (x)`| Returns the hyperbolic tangent of a number. | `tanh(0)` returns `0`|
+|`csch (x)`| Returns the hyperbolic cosecant (reciprocal hyperbolic sine) of a number. (i.e. `1/sinh(x)`) | `csch(1)` returns `0.8509181282393216`|
+|`sech (x)`| Returns the hyperbolic secant (reciprocal hyperbolic cosine) of a number. (i.e. `1/cosh(x)`) | `sech(0)` returns `1`|
+|`coth (x)`| Returns the hyperbolic cotangent (reciprocal hyperbolic tangent) of a number. (i.e. `1/tan(x)`) | `coth(1)` returns `1.3130352854993315`|
+|`asinh (x)`| Returns the inverse hyperbolic sine of a number. | `asinh(0)` returns `0`|
+|`acosh (x)`| Returns the inverse hyperbolic cosine of a number. | `acosh(1)` returns `0`|
+|`atanh (x)`| Returns the inverse hyperbolic tangent of a number. | `atanh(0)` returns `0`|
+##### Comparison functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`greaterThan (x, y)` or `> (x, y)`| `greaterThan()` or `> ()` takes 2 parameters and compare if that the 1st parameter is greater than the second parameter or not | `> (67 , 5)` returns `true`. <br> Same as the expression: `67 > 5`|
+|`lessThan (x, y)` or `< (x, y)`| `lessThan()` or `< ()` takes 2 parameters and compare if that the 1st parameter is less than the second parameter or not | `< (67 , 5)` returns `false`. <br> Same as the expression: `67 < 5`|
+|`isEqual (x, y)` or `== (x, y)`| `isEqual ()` or `== ()` takes 2 parameters and compare them and returns `true` if the both parameters are same, otherwise it returns `false` | `isEqual (60 , 50+10)` returns `true`. <br> Same as the expression: `60 == 50 + 10`|
+|`isNotEqual (x, y)` or `!= (x, y)`| `isNotEqual ()` or `!= ()` takes 2 parameters and compare them and returns `false` if the both parameters are same, otherwise it returns `true` | `isNotEqual (60 , 50+10)` returns `false`. <br> Same as the expression: `60 != 50 + 10`|
+##### Logical functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`and (x, y, ...)` or `&&(x, y, ...)`| `and()` or `&&()` tests each of its arguments , if all are true then it will return true | `and(true , false, true, false)` returns `false`|
+|`or (x, y, ...)` or `\|\|(x, y, ...)`| `or()` or `\|\|()` tests each of its arguments ,  if any of its arguments is true then it will return true | `or (true , false, true, false)` returns `true`|
+|`not (x)` or `!(x)`| `not ()` or `!()` changes a 'true' value to a 'false' value and a 'false' value to a 'true' value | `not (false)` returns `true`|
+|`if (condition, valueIfTrue, valueIfFalse)`| `if()` takes 3 parameters. 1st parameter is a condition parameter, if the condition is true then it returns 2nd parameter otherwise it returns 3rd parameter (if the 3rd parameter is not specified then its default value false will be return) | `if(50 < 100 , '50 is less than 100', '100 is less than 50')` returns `'50 is less than 100'`|
+##### Bitwise functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`bitAnd (x , y)` or `& (x , y)`| `bitAnd (x , y)` or `& (x , y)` returns the bitwise AND ( & ) of those two parameters. | `bitAnd (5 , 1)` returns `1`|
+|`bitOr (x , y)` or `\| (x , y)`| `bitOr (x , y)` or `\| (x , y)` returns the bitwise OR ( \| ) of those two parameters. | `bitAnd (5 , 1)` returns `5`|
+|`bitXor (x , y)` or `^ (x , y)`| `bitXor (x , y)` or `^ (x , y)` returns the bitwise XOR (exclusive OR) of those two parameters. | `bitXor (5 , 1)` returns `4`|
+|`bitNot (x)` or `~ (x)`|`bitNot (x)` or `~ (x)` returns the bitwise NOT ( ~ ) of the given parameter| `bitNot (5)` returns `-6`|
+|`bitLShift (numberValue , positionValue)` or `<< (numberValue , positionValue)`|`bitLShift (numberValue , positionValue)` or `<< (numberValue , positionValue)` returns the Bitwise Left Shifted numberValue with respect to the positionValue.| `bitLShift (5 , 2)` returns `20` <br><br> `bitLShift (-5 , 2)` returns `-20`|
+|`bitRShift (numberValue , positionValue)` or `>> (numberValue , positionValue)`|`bitRShift (numberValue , positionValue)` or `>> (numberValue , positionValue)` returns the Bitwise Right Shifted numberValue with respect to the positionValue.| `bitRShift (5 , 2)` returns `1` <br><br> `bitRShift (-5 , 2)` returns `-2`|
+|`bitURShift (numberValue , positionValue)` or `>>> (numberValue , positionValue)`|`bitURShift (numberValue , positionValue)` or `>>> (numberValue , positionValue)` returns the Bitwise Unsigned Right Shifted numberValue with respect to the positionValue.| `bitURShift (5 , 2)` returns `1` <br><br> `bitURShift (-5 , 2)` returns `1073741822`|
 
-> <ins>[NOTE: ] </ins><br>
-> In addition to these functions, ViewPoint also supports all functions from JavaScript’s `Math` object — but without the `Math` prefix.  
-> For example, `Math.sin()` can be used in ViewPoint simply as `sin()`. <br>
-> `Math.random()` can be used in ViewPoint simply as `random()`.
+##### Statistical functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`max (x, y, ...)`| Returns the largest number of the provided numerical arguments|`max (10, 20, 30, 40, 50)` returns `50`|
+|`min (x, y, ...)`| Returns the smallest number of the provided numerical arguments|`min (10, 20, 30, 40, 50)` returns `10`|
+|`count (x, y, ...)`| Returns the total numbers (count) of the given arguments|`count (10, 20, 30, 40, 50)` returns `5`|
+|`sum (x, y, ...)`| Returns the sum of all provided arguments|`sum (10, 20, 30, 40, 50)` returns `150`|
+|`avg (x, y, ...)`| Returns the average value (arithmetic mean) of the given parameters|`avg (10, 20, 30, 40, 50)` returns `30`|
+|`prod (x, y, ...)`| Returns the multiplication of all provided arguments|`prod (10, 20, 30, 40, 50)` returns `12000000`|
+##### Constants:
+| Name | Details | Example|
+|-|-|-|
+|`Const ('E')`| Returns Euler's number, the base of natural logarithms| `Const('E')` returns `2.718281828459045`|
+|`Const ('LN2')`| Returns the natural logarithm of 2| `Const('LN2')` returns `0.6931471805599453`|
+|`Const ('LN10')`| Returns the natural logarithm of 10| `Const('LN10')` returns `2.302585092994046`|
+|`Const ('LOG2E')`| Returns the base 2 logarithm of `e`| `Const('LOG2E')` returns `1.4426950408889634`|
+|`Const ('LOG10E')`| Returns the base 10 logarithm of `e`| `Const('LOG10E')` returns `0.4342944819032518`|
+|`Const ('PI')`| Returns the ratio of the circumference of a circle to its diameter| `Const('PI')` returns `3.141592653589793`|
+|`Const ('SQRT1_2')`| Returns the square root of 1/2| `Const('SQRT1_2')` returns `0.7071067811865476`|
+|`Const ('SQRT2')`| Returns the square root of 1/2| `Const('SQRT2')` returns `1.4142135623730951`|
+##### String functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`string (x)`| Returns the string converted value of the given parameter|`string (46)` returns `'46'`|
+|`strLen (x)`| Returns the length of the given string parameters | `strLen ('Sample')` returns `6`|
+|`strUpper (x)`| Converts all characters of the provided string to uppercase and returns the converted string  | `strUpper ('Sample')` returns `'SAMPLE'`|
+|`strLower (x)`| Converts all characters of the provided string to lowercase and returns the converted string  | `strLower ('SaMpLe')` returns `'sample'`|
+|`strTrim (x)`| Removes whitespace from both sides of the provided string and returns the new string  | `strTrim ('   Sample    ')` returns `'Sample'`|
+|`strIncludes (largerString, smallerString, pos)`| Returns `true` if a larger string contains a specified smaller string otherwise it returns `false` <br> It takes 3 parameters: <br> <br> <ins>1st parameter</ins> is the larger string (main string) on which the test / search to be done. <br><br> <ins>2nd parameter</ins> is the smaller string for which the test / search to be done. <br><br> <ins>3rd parameter</ins> is the start position: The starting index in the main string from which the test / search begins. This parameter is optional and default value is 0  | `strIncludes('This is a sample string data which contains the "sample" word','sample')` returns `true`|
+|`strStartsWith (largerString, smallerString, pos)`|Returns `true` if a larger string starts with a specified smaller string otherwise it returns `false`. <br>It takes 3 parameters: <br><br><ins>1st parameter</ins> is the larger string (main string) on which the test / search to be done. <br><br> <ins>2nd parameter</ins> is the smaller string for which the test / search to be done.<br><br> <ins>3rd parameter</ins> is the start position: The starting index in the main string from which the test / search begins. This     parameter is optional and default value is 0|`strStartsWith('This is a sample string data which contains the "sample" word','This is a')` returns `true`|
+|`strEndsWith (largerString, smallerString, pos)`|Returns `true` if a larger string ends with a specified smaller string otherwise it returns `false`. <br>It takes 3 parameters: <br><br><ins>1st parameter</ins> is the larger string (main string) on which the test / search to be done. <br><br> <ins>2nd parameter</ins> is the smaller string for which the test / search to be done.<br><br> <ins>3rd parameter</ins> is The length of the main string upto which point the search / test is to be performed. This parameter is optional and default value is the full length of the larger string.|`strEndsWith('This is a sample string data which contains the "sample" word','the "sample" word')` returns `true`|
+|`strIndexOf(largerString, smallerString, pos)`|Returns the position of the first occurrence of the specified smallerStr value in a largerStr string. This function returns -1 if there are no occurrence of the specified smallerStr value in a largerStr string.<br>It takes 3 parameters:<br><br> <ins>1st parameter</ins> is the larger string (main string) on which the test / search to be done. <br><br> <ins>2nd parameter</ins> is the smaller string for which the test / search to be done.<br><br> <ins>3rd parameter</ins> is the start position: The starting index in the main string from which the test / search begins. This parameter is optional and default value is 0.|`strIndexOf('This is a sample string data which contains the "sample" word',"string data")` returns `17`|
+|`strSubStr (mainStr, startPos, endPos)`|Returns the extracted portion of the mainStr from the startPos up to (but not including) the endPos. <br>It takes 3 parameters: <br><br> <ins>1st parameter</ins> is the main string from which the substring extraction is performed.<br><br> <ins>2nd parameter:</ins> the startPosition index from which (including the index) the extraction begins.<br><br> <ins>3rd parameter</ins> is the endPosition index parameter up to (not including) which index of the extraction take places. This parameter is optional if omitted then the extraction continues to the end of the string (including last character of the main string).|`strSubStr ('This is a sample string data which contains the "sample" word',10,28)` returns `sample string data`|
+|`strRepeat (str , count)`|Returns a new string which contains the specified number of copies of the string, concatenated together.|`strRepeat ('This is a sample string! ',3)` returns `'This is a sample string! This is a sample string! This is a sample string! '`|
+|`strReplace (mainStr, searchValue, replacement)`|Searchs for a specifed sub string within the main string, replaces the first occurrence of that substring with the given replacement string, and returns the new (resulting) string.|`strReplace('This is a sample string data which contains the "sample" word' , 'sample','demo')` returns `'This is a demo string data which contains the "sample" word'`|
+|`strReplaceAll (mainStr, searchValue, replacement)`|Searchs for a specifed sub string within the main string, replaces all the occurrence of that substring with the given replacement string, and returns the new (resulting) string.|`strReplaceAll ('This is a sample string data which contains the "sample" word' , 'sample','demo')` returns `'This is a demo string data which contains the "demo" word'`|
 
+##### Miscellaneous functions:
+| Function Name | Details | Example|
+|-|-|-|
+|`degToRad (x)`| `degToRad ()` function takes input in degree form and returns the output in radian form | `tan(degToRad(45))` returns `1`|
+|`random ()`| `random ()` returns a pseudo-random number between 0 and 1. | `random ()` may returns `0.6030318664027469`|
+|`fround (x)`| Returns the nearest 32-bit floating-point representation of a number. | `fround (0.1)` returns `0.10000000149011612`|
+|`f16round (x)`| Returns the nearest 16-bit floating-point representation of a number. | `f16round (0.1)` returns `0.0999755859375`|
+|`clz32 (x)`| Returns the number of leading zero bits in the 32-bit binary representation of a number. | `clz32(1)` returns `31`|
+|`imul (x, y)`| Returns the result of the 32-bit multiplication of the two parameters. | `imul (2, 4)` returns `8`|
+|`typeof (x)`| Returns the data type of its parameter |`typeof ("String Data")` returns `'string'` |
+|`vpVer ()`| Returns the current version of the ViewPoint in a string format | `vpVer()` returns `'ViewPoint v2.1.2'`|
+
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
+
+---
 ### Variables:
-+ #### Using <ins>JavaScript variable</ins> directly in the expression using ```${}``` and ``` ` ```
+Variables are named containers used to store data values that can be accessed, modified, and reused during expression evaluation.
+#### Using <ins>JavaScript variable</ins> directly in the expression using `${}` and ``` ` ```
 ```javascript
 //Create a new ViewPoint object with the ViewPoint class
 let VP = new ViewPoint();
@@ -331,7 +580,7 @@ let output = VP.evaluate(expresion);
 //For output the result
 console.log(output); //Output: 125
 ```
-+ #### Using <ins> ViewPoint 's variable</ins> in the expression [defined using external way: (`.var( name, value)` method)]
+#### Using <ins> ViewPoint 's variable</ins> in the expression [defined using external way: (`.var( name, value)` method)]
 ```javascript
 //Create a new ViewPoint object with viewpoint class
 let ViewPoint_obj = new ViewPoint();
@@ -348,7 +597,7 @@ let output = ViewPoint_obj.evaluate(expresion);
 //For output the result
 console.log(output); //Output: 3100
 ```
-+ #### Using <ins> ViewPoint 's variable</ins> in the expression [defined directly using in-line expression way: (`with assignment operators`)]
+#### Using <ins> ViewPoint 's variable</ins> in the expression [defined directly using in-line expression way: (`with assignment operators`)]
 ```javascript
 //Create a new ViewPoint object with viewpoint class
 let VP_obj = new ViewPoint();
@@ -375,14 +624,22 @@ console.log(VP_obj.interpret(expr)) //Output: [500 ,  24045]
 
 
 ```
-> [NOTE:] <br>
-> Starting from ViewPoint v2.1.0 there are various assignment operators for variable assignment:
-> 1. Equal assignment operator (`=`)
-> 2. Addition assignment operator (`+=`)
-> 3. Subtraction assignment operator (`-=`)
-> 4. Multiplication assignment operator (`*=`)
-> 5. Division assignment operator (`/=`)
 
+##### Assignment operators in the ViewPoint:
+ViewPoint supports assignments of in-line variables using the following operators. Starting from ViewPoint v2.1.0 there are various assignment operators for variable assignment:
+
+|Name |Operator |Details |Example |Equivalent To |
+|-|-|-|-|-|
+|Equal assignment operator|`=`|Assigns a value to a variable|`myVar = 10`| `myVar = 10`|
+|Addition assignment operator|`+=`|Adds a value to a previously existing variable and assign the updated value|`myVar += 1`| `myVar = myVar + 1`|
+|Subtraction assignment operator|`-=`|Subtracts a value from a previously existing variable and assign the updated value|`myVar -= 1`| `myVar = myVar - 1`|
+|Multiplication assignment operator|`*=`|Multiplies a value with a previously existing variable and assign the updated value|`myVar *= 2`| `myVar = myVar * 2`|
+|Division assignment operator|`/=`|Divides a previously existing variable with a value and assign the updated value|`myVar /= 2`| `myVar = myVar / 2`|
+
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
+
+---
 ## Keywords
 Starting from ViewPoint v2.1.0 there are some keywords for various purpose:
 | Keyword|Syntax | Purpose | Example useage|
@@ -395,7 +652,7 @@ Starting from ViewPoint v2.1.0 there are some keywords for various purpose:
 
 
 ## Other useful usages and methods
-+ ### Expression Tokenization using ```.tokenize()``` method
+### Expression Tokenization using `.tokenize()` method
 ```Javascript
 //Create a new ViewPoint object with the viewpoint class
 let ViewPoint_obj = new ViewPoint();
@@ -412,7 +669,7 @@ console.log(token_array)
 [ 2, '/', 5.04, '+', 5n, '+', 'Sample quoted text', '+', '(', 40, '\*', '(', 45, '-', 2, ')', ')' ]
 */
 ```
-+ ### Infix to Postfix Conversion using ```.infix_to_postfix()``` method
+### Infix to Postfix Conversion using `.infix_to_postfix()` method
 ```javascript
 //Create a new ViewPoint object with viewpoint class
 let VP = new ViewPoint();
@@ -431,7 +688,7 @@ console.log(postFix_Array) //Output: [ 4, 8, 5, 1, '-', '*', '+' ]
 
 ```
 
-+ ### Changing the default operator precedence  using ```.ViewPoint_math_def.operator_precedence``` property
+### Changing the default operator precedence  using `.ViewPoint_math_def.operator_precedence` property
 ```javascript
 //Create a new ViewPoint object with viewpoint class
 let ViewPoint_obj = new ViewPoint();
@@ -463,55 +720,9 @@ console.log(output); //Output: 9 (First * then +)
 console.log(output2); //Output: 12 (First + then *)
 ```
 #### Default operator's precedence:
-```javascript
-//Default operator's precedence:
+[Default operator's precedence in the ViewPoint](#operators)
 
-operator_precedence: {
-
-            //Multiplication operator (used for implementing unary minus)
-            //Basicly its function is same as '*' but with higher precedence
-            '×': 12,
-
-            //Basic math operators 's precedence
-            '^': 11,
-            '**': 11,
-            '*': 10,
-            '/': 9,
-            '%': 9, //'%' is a Modulus (Remainder) operator
-            '+': 8,
-            '-': 8,
-
-            //Comparison operators 's precedence
-            '<': 7,
-            '>': 7,
-            '<=': 7,
-            '>=': 7,
-            '==': 6,
-            '!=': 6,
-
-
-            //Logical operators 's precedence
-            '&': 5,
-            '|': 4,
-            '&&': 3,
-            '||': 2,
-
-            //Assignment operators 's precedence
-            '=': 1,
-            '+=': 1,
-            '-=': 1,
-            '*=': 1,
-            '/=': 1,
-
-            //New line operator 's precedence
-            '\n': 0,
-            '\r': 0,
-            ';': 0,
-
-        }
-``` 
-
-+ ### Changing the default behavior of a operator using ```.ViewPoint_math_def.<method_name>```
+### Changing the default behavior of a operator using `.ViewPoint_math_def.<method_name>`
 ```javascript
 //Create a new ViewPoint object with viewpoint class
 let ViewPoint_obj = new ViewPoint();
@@ -535,8 +746,8 @@ console.log(output); //Output: 8 (multiplication ('*') operator works as multipl
 //For output the re-evaluating result (multiplication ('*') operator works as addition ('+'))
 console.log(output2); //Output: 6
 ```
-#### ```ViewPoint_math_def```:
-This object is used for defining of the math logic and math operations for ViewPoint
+#### `ViewPoint_math_def`:
+This object is used for defining the math and other expression related logic and operations for ViewPoint
 |  Name | Type | Details |
 | - | - |- |
 |**operator_precedence**|**Object**|This object contains the operator's precedence value according to the BODMAS or PEMDAS rule | 
@@ -557,6 +768,16 @@ This object is used for defining of the math logic and math operations for ViewP
 |**logicalAnd (value1, value2)**|**Method**|Definition of Logical And (`&&`) operator Behavior|
 |**logicalOr (value1, value2)**|**Method**|Definition of Logical Or (`\|\|`) operator Behavior|
 |**assign (varName, varValue, assignType)**|**Method**|Definition of Assignment operator (equal assignment operator (`=`), addition assignment operator (`+=`), subtraction assignment operator (`-=`), multiplication assignment operator (`*=`), division assignment operator (`/=`)) Behavior|
+---
+[⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
+
+---
+## License:
+The <b>ViewPoint</b> is licensed under the GNU General Public License v3.0 (GPLv3).
+
+While not legally required, I kindly request that if you use, modify, or distribute this project, please give credit to the original author name, Nirmal Paul (N Paul) (https://github.com/nirmalpaul383) .
+
+I have dedicated significant time and effort to developing this project, with a strong focus on clean, well-structured, and easy-to-understand code. Your acknowledgment of the original authorship is greatly appreciated.
 
 
 ## Thanks

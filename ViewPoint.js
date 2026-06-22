@@ -234,7 +234,7 @@ class ViewPoint {
             else {
                 let errMsg = `Data Type Error: Power operator (^) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
 Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
             }
         },
 
@@ -252,7 +252,7 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
             else {
                 let errMsg = `Data Type Error: Multiplication operator (*) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
 Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
             }
 
         },
@@ -270,7 +270,7 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
             else {
                 let errMsg = `Data Type Error: Division operator (/) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
 Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
             }
 
 
@@ -289,7 +289,7 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
             else {
                 let errMsg = `Data Type Error: Modulus operator (%) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
 Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
             }
 
 
@@ -315,7 +315,7 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
                 let errMsg = `Data Type Error: Addition operator (+): requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
 Concatenation operator (+): requires both operands to be string.
 Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
             }
 
 
@@ -334,7 +334,7 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
             else {
                 let errMsg = `Data Type Error: Subtraction operator (-) requires both operands to be either numbers (default number type in JavaScript is floating-point) or BigInts.
 Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof (value2)}`
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
             }
         },
 
@@ -357,7 +357,7 @@ Received: ${value1} type of: ${typeof (value1)} and ${value2} type of: ${typeof 
                 let errMsg = `Data Type Error: Less than ('<') operator requires both operands to be either numbers or BigInts.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -380,7 +380,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                 let errMsg = `Data Type Error: Greater than ('>') operator requires both operands to be either numbers or BigInts.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -403,7 +403,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                 let errMsg = `Data Type Error: Less than or Equal('<=') operator requires both operands to be either numbers or BigInts.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -426,7 +426,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                 let errMsg = `Data Type Error: Greater than or Equal('<=') operator requires both operands to be either numbers or BigInts.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -449,7 +449,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                 let errMsg = `Data Type Error: Equal('==') operator requires both operands to be in same data types.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -471,7 +471,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                 let errMsg = `Data Type Error: Not Equal('==') operator requires both operands to be in same data types.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -484,8 +484,8 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
         //Bit Wise And ('&') operator
         bitWiseAnd(value1, value2) {
 
-            //If both operands are boolean data types only then this operation will be performed otherwise an error message will be thrown
-            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'boolean')) {
+            //If both operands are number data types only then this operation will be performed otherwise an error message will be thrown
+            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'number')) {
 
                 return (value1 & value2);
 
@@ -493,10 +493,10 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
             //Throw typeError
             else {
-                let errMsg = `Data Type Error: Bit Wise And ('&') operator requires both operands to be in boolean data types.
+                let errMsg = `Data Type Error: Bit Wise And ('&') operator requires both operands to be in number data types.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -506,8 +506,8 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
         //Bit Wise Or ('|') operator
         bitWiseOr(value1, value2) {
 
-            //If both operands are boolean data types only then this operation will be performed otherwise an error message will be thrown
-            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'boolean')) {
+            //If both operands are number data types only then this operation will be performed otherwise an error message will be thrown
+            if ((typeof (value1) === typeof (value2)) && (typeof (value1) === 'number')) {
 
                 return (value1 | value2);
 
@@ -515,10 +515,10 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
             //Throw typeError
             else {
-                let errMsg = `Data Type Error: Bit Wise Or ('|') operator requires both operands to be in boolean data types.
+                let errMsg = `Data Type Error: Bit Wise Or ('|') operator requires both operands to be in number data types.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -540,7 +540,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                 let errMsg = `Data Type Error: Logical And ('&&') operator requires both operands to be in boolean data types.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -562,7 +562,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                 let errMsg = `Data Type Error: Logical Or ('||') operator requires both operands to be in boolean data types.
 Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (value2)}`;
 
-                throw new Error(errMsg);
+                throw new TypeError(errMsg);
 
 
             }
@@ -699,10 +699,8 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
     //For storing ViewPoint 's built-in functions
     func_DB_intrnl = {
 
-
-
-        //For defining the #and function
-        //#and will test each of its arguments , if all are true then it will return true
+        //For defining the logical #and function
+        //logical #and will test each of its arguments , if all are true then it will return true
         "and": function (...inputArray) {
 
             //Will be used for storing the output
@@ -727,7 +725,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
             return output;
         },
 
-        //For defining the #&& function (shortcut of #and function)
+        //For defining the logical #&& function (shortcut of #and function)
         "&&": function (...inputArray) {
 
             //For storing the output using the #and function
@@ -737,8 +735,8 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
             return output;
         },
 
-        //For defining the #or function
-        //#or will test each of its arguments , if any of its arguments is true then it will return true
+        //For defining the logical #or function
+        //logical #or will test each of its arguments , if any of its arguments is true then it will return true
         "or": function (...inputArray) {
 
             //Will be used for storing the output
@@ -762,7 +760,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
             return output;
         },
 
-        //For defining the #|| function (shortcut of #or function)
+        //For defining the logical #|| function (shortcut of logical #or function)
         "||": function (...inputArray) {
 
             //For storing the output using the #or function
@@ -772,15 +770,15 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
             return output;
         },
 
-        //For defining the #not function
-        //#not will change 'true' value to a 'false' value and 'false' value to a 'true' value
+        //For defining the logical #not function
+        //logical #not will change 'true' value to a 'false' value and 'false' value to a 'true' value
         "not": function (input) {
 
             //For returning the ouput
             return !(input);
         },
 
-        //For defining the #! function (shortcut of #not function)
+        //For defining the logical #! function (shortcut of logical #not function)
         "!": function (input) {
 
             //For storing the output using the #not function
@@ -853,6 +851,28 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
             return output;
         },
 
+        //For defining the #isNotEqual function
+        //#isNotEqual will takes 2 parameters and return false if the both parameter is same and return true
+        //if the both parameter are not same
+        "isNotEqual": function (fstVal, sndVal) {
+
+            //For comparing the 1st value with the 2nd vale and store it to the output value
+            let ouput = (fstVal !== sndVal);
+
+            //For returning the ouput
+            return ouput;
+        },
+
+        //For defining the #!= function (shortcut of #isNotEqual function)
+        "!=": function (input1, input2) {
+
+            //For storing the output using the #isNotEqual function
+            let output = this['isNotEqual'](input1, input2);
+
+            //For returning the output
+            return output;
+        },
+
         //For defining the #greaterThanOrEqual function
         //#greaterThanOrEqual will takes 2 parameters and compare if that the 1st parameter is greater than or
         //equal to the second parameter or not
@@ -917,6 +937,170 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
         },
 
+        //For defining the #bitAnd (Bitwise AND) function
+        //#bitAnd takes 2 parameters and returns the bitwise AND of those two parameters.
+        "bitAnd": function (firstValue, secondValue) {
+
+            //For calculating and storing the output
+            let output = (firstValue & secondValue);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #& (Bitwise AND) function (shortcut of #bitAnd function)
+        "&": function (firstValue, secondValue) {
+
+            //For storing the output using the #bitAnd function
+            let output = this['bitAnd'](firstValue, secondValue);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #bitOr (Bitwise OR) function
+        //#bitOR takes 2 parameters and returns the bitwise OR of those two parameters.
+        "bitOr": function (firstValue, secondValue) {
+
+            //For calculating and storing the output
+            let output = (firstValue | secondValue);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #| (Bitwise OR) function (shortcut of #bitOR function)
+        "|": function (firstValue, secondValue) {
+
+            //For storing the output using the #bitOr function
+            let output = this['bitOr'](firstValue, secondValue);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #bitXor (Bitwise XOR) function
+        //#bitXor takes 2 parameters and returns the bitwise XOR (exclusive OR) of those two parameters.
+        "bitXor": function (firstValue, secondValue) {
+
+            //For calculating and storing the output
+            let output = (firstValue ^ secondValue);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #^ (Bitwise XOR) function (shortcut of #bitXor function)
+        "^": function (firstValue, secondValue) {
+
+            //For storing the output using the #bitXor function
+            let output = this['bitXor'](firstValue, secondValue);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #bitNot (Bitwise NOT) function
+        //#bitNot takes 1 parameter and returns the bitwise NOT of the given parameter.
+        "bitNot": function (firstValue) {
+
+            //For calculating and storing the output
+            let output = (~firstValue);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #~ (Bitwise NOT) function (shortcut of #bitNot function)
+        "~": function (firstValue) {
+
+            //For storing the output using the #bitNot function
+            let output = this['bitNot'](firstValue);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #bitLShift (Bitwise Left Shift) function
+        //#bitLShift takes 2 parameters: (a) numberValue and (b) positionValue and returns
+        //the Bitwise Left Shifted numberValue with respect to the positionValue.
+        "bitLShift": function (numberValue, pos) {
+
+            //For calculating and storing the output
+            let output = (numberValue << pos);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #<< (Bitwise Left Shift) function (shortcut of #bitLShift function)
+        "<<": function (numberValue, pos) {
+
+            //For storing the output using the #bitLShift function
+            let output = this['bitLShift'](numberValue, pos);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #bitRShift (Bitwise Right Shift) function
+        //#bitRShift takes 2 parameters: (a) numberValue and (b) positionValue and returns
+        //the Bitwise Right Shifted numberValue with respect to the positionValue.
+        "bitRShift": function (numberValue, pos) {
+
+            //For calculating and storing the output
+            let output = (numberValue >> pos);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #>> (Bitwise Right Shift) function (shortcut of #bitRShift function)
+        ">>": function (numberValue, pos) {
+
+            //For storing the output using the #bitRShift function
+            let output = this['bitRShift'](numberValue, pos);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #bitURShift (Bitwise Unsigned Right Shift) function
+        //#bitURShift takes 2 parameters: (a) numberValue and (b) positionValue and returns
+        //the Bitwise Unsigned Right Shifted numberValue with respect to the positionValue.
+        "bitURShift": function (numberValue, pos) {
+
+            //For calculating and storing the output
+            let output = (numberValue >>> pos);
+
+            //For returning the output
+            return output;
+
+        },
+
+        //For defining the #>>> (Bitwise Unsigned RightShift) function (shortcut of #bitURShift function)
+        ">>>": function (numberValue, pos) {
+
+            //For storing the output using the #bitURShift function
+            let output = this['bitURShift'](numberValue, pos);
+
+            //For returning the output
+            return output;
+
+        },
+
         //For defining the #string function. #string function takes the data and returns its string form.
         "string": function (data) {
 
@@ -969,13 +1153,13 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
             //If the name is not in string
             if (typeof (name) !== "string") {
                 //For throwing the error
-                throw new Error(`Name of the property / constant of JS 's Math object must be in string`);
+                throw new SyntaxError(`Name of the property / constant of JS 's Math object must be in string`);
 
             }
             //If the name is a empty string
             else if (name === "") {
                 //For throwing the error
-                throw new Error(`Name of the property / constant of JS 's Math object must not be a empty string`);
+                throw new SyntaxError(`Name of the property / constant of JS 's Math object must not be a empty string`);
             }
             else {
 
@@ -994,10 +1178,21 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
                 //If the name is not available in the JS 's Math object
                 else {
-                    throw new Error(`There is no property / constant named ${name} in the Math object in this runtime`)
+                    throw new ReferenceError(`There is no property / constant named ${name} in the Math object in this runtime`)
                 }
             }
 
+        },
+
+        //For defining the #fract function
+        //#fract function returns the fractional part of the provided number by removing the integer part of that number.
+        "fract": function (numberWithFractpart) {
+
+            //For calculating and storing the output
+            let output = numberWithFractpart - Math.trunc(numberWithFractpart);
+
+            //For returning the output
+            return output;
         },
 
         //For defining the #degToRad function
@@ -1011,6 +1206,79 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
             //For return the result
             return radOutput;
+        },
+
+        //For defining the #radToDeg function
+        //#radToDeg function takes input in radian form and returns the output in degree form
+        "radToDeg": function (radInput) {
+            //Will be used for storing the output result
+            let degOutput = 0;
+
+            //For calculating the result
+            degOutput = ((180 * radInput) / Math.PI);
+
+            //For return the result
+            return degOutput;
+        },
+
+        //For defining the #csc function
+        //#csc (Cosecant) takes an angle in radians and returns the reciprocal of its sine
+        "csc": function (radDegree) {
+            //For calculating and storing the output result
+            let output = (1 / (Math.sin(radDegree)));
+
+            //For return the result
+            return output;
+        },
+
+        //For defining the #sec function
+        //#sec (Secant) takes an angle in radians and returns the reciprocal of cosine
+        "sec": function (radDegree) {
+            //For calculating and storing the output result
+            let output = (1 / (Math.cos(radDegree)));
+
+            //For return the result
+            return output;
+        },
+
+        //For defining the #cot function
+        //#cot (Cotangent) takes an angle in radians and returns the reciprocal of tangent
+        "cot": function (radDegree) {
+            //For calculating and storing the output result
+            let output = (1 / (Math.tan(radDegree)));
+
+            //For return the result
+            return output;
+        },
+
+        //For defining the #csch function
+        //#csch (Hyperbolic Cosecant) takes an angle in radians and returns the reciprocal of its hyperbolic sine
+        "csch": function (radDegree) {
+            //For calculating and storing the output result
+            let output = (1 / (Math.sinh(radDegree)));
+
+            //For return the result
+            return output;
+        },
+
+        //For defining the #sech function
+        //#sech (Hyperbolic Secant) takes a value and returns the reciprocal of its hyperbolic cosine
+        "sech": function (radDegree) {
+            //For calculating and storing the output result
+            let output = (1 / (Math.cosh(radDegree)));
+
+            //For return the result
+            return output;
+        },
+
+        //For defining the #coth function
+        //#coth (Hyperbolic Cotangent) takes a value and returns the reciprocal of its hyperbolic tangent
+        "coth": function (radDegree) {
+            //For calculating and storing the output result
+            let output = (1 / (Math.tanh(radDegree)));
+
+            //For return the result
+            return output;
         },
 
         //For defining the #sum function, which returns the sum of all provided parameters
@@ -1062,6 +1330,281 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
         },
 
+        //For defining the #prod function, which returns the multiplication of all provided parameters
+        "prod": function (...inputArray) {
+
+            //Will be used for storing the result
+            let output = 1;
+
+            //For looping through each element of the inputArray
+            for (let i = 0; i <= (inputArray.length - 1); i++) {
+
+                //For multiplying the current element value to the result
+                output *= inputArray[i];
+            };
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strLen function
+        //#strLen returns the length of the given string parameters
+        "strLen": function (str) {
+
+            //For throwing an error if the given parameters is not a string datatype
+            if (typeof (str) !== 'string') {
+                throw new TypeError(`'strLen()' function only works on string data. Datatype of ${str} is ${typeof (str)}`)
+            }
+
+            //For calculating and storing the output
+            let output = str.length;
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strUpper function
+        //#strUpper converts all characters of the provided string to uppercase and returns the converted string 
+        "strUpper": function (str) {
+
+            //For throwing an error if the given parameters is not a string datatype
+            if (typeof (str) !== 'string') {
+                throw new TypeError(`'strUpper()' function only works on string data. Datatype of ${str} is ${typeof (str)}`)
+            }
+
+            //For converting and storing the output
+            let output = str.toUpperCase();
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strLower function
+        //#strLower converts all characters of the provided string to lowercase and returns the converted string 
+        "strLower": function (str) {
+
+            //For throwing an error if the given parameters is not a string datatype
+            if (typeof (str) !== 'string') {
+                throw new TypeError(`'strLower()' function only works on string data. Datatype of ${str} is ${typeof (str)}`)
+            }
+
+            //For converting and storing the output
+            let output = str.toLowerCase();
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strTrim function
+        //#strTrim removes whitespace from both sides of the provided string and returns the new string 
+        "strTrim": function (str) {
+
+            //For throwing an error if the given parameters is not a string datatype
+            if (typeof (str) !== 'string') {
+                throw new TypeError(`'strTrim()' function only works on string data. Datatype of ${str} is ${typeof (str)}`)
+            }
+
+            //For converting and storing the output
+            let output = str.trim();
+
+            //For returning the output
+            return output;
+        },
+
+
+        //For defining the #strIncludes function
+        //#strIncludes function returns true if a larger string contains a specified smaller string otherwise it returns false
+        // #strIncludes takes 3 parameters: 1st parameter is the larger string (main string) on which the test / search to be done.
+        // 2nd parameter is the smaller string for which the test / search to be done.
+        // 3rd parameter is the start position: The starting index in the main string from which the test / search begins. This
+        // parameter is optional and default value is 0
+        "strIncludes": function (largerStr, smallerStr, startPos = 0) {
+
+            //For throwing an error if the given string parameters are not a string datatype
+            if ((typeof (largerStr) !== 'string') || (typeof (smallerStr) !== 'string')) {
+                throw new TypeError(`'strIncludes()' function only works on string type data. Datatype of ${largerStr} is ${typeof (largerStr)} and Datatype of ${smallerStr} is ${typeof (smallerStr)} `)
+            }
+
+            //For throwing an error if the given startPos parameters is not a number datatype
+            if (typeof (startPos) !== 'number') {
+                throw new TypeError(`'strIncludes()' function can only take start index as number data type. Datatype of ${startPos} is ${typeof (startPos)}`)
+            }
+
+            //For testing the string using '.includes()' method and storing the output
+            let output = largerStr.includes(smallerStr, startPos);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strStartsWith function
+        //#strStartsWith function returns true if a larger string starts with a specified smaller string otherwise it returns false.
+        // #strStartsWith takes 3 parameters: 1st parameter is the larger string (main string) on which the test / search to be done.
+        // 2nd parameter is the smaller string for which the test / search to be done.
+        // 3rd parameter is the start position: The starting index in the main string from which the test / search begins. This
+        // parameter is optional and default value is 0
+        "strStartsWith": function (largerStr, smallerStr, startPos = 0) {
+
+            //For throwing an error if the given string parameters are not a string datatype
+            if ((typeof (largerStr) !== 'string') || (typeof (smallerStr) !== 'string')) {
+                throw new TypeError(`'strStartsWith()' function only works on string type data. Datatype of ${largerStr} is ${typeof (largerStr)} and Datatype of ${smallerStr} is ${typeof (smallerStr)} `)
+            }
+
+            //For throwing an error if the given startPos parameters is not a number datatype
+            if (typeof (startPos) !== 'number') {
+                throw new TypeError(`'strStartsWith()' function can only take start index as number data type. Datatype of ${startPos} is ${typeof (startPos)}`)
+            }
+
+            //For testing the string using '.startsWith()' method and storing the output
+            let output = largerStr.startsWith(smallerStr, startPos);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strEndsWith function
+        //#strEndsWith function returns true if a larger string ends with a specified smaller string otherwise it returns false.
+        // #strEndsWith takes 3 parameters: 1st parameter is the larger string (main string) on which the test / search to be done.
+        // 2nd parameter is the smaller string for which the test / search to be done.
+        // 3rd parameter is The length of the main string upto which point the search / test is to be performed. This parameter is
+        // optional and default value is the full length of the larger string.
+        "strEndsWith": function (largerStr, smallerStr, lenPos = (largerStr.length)) {
+
+            //For throwing an error if the given string parameters are not a string datatype
+            if ((typeof (largerStr) !== 'string') || (typeof (smallerStr) !== 'string')) {
+                throw new TypeError(`'strEndsWith()' function only works on string type data. Datatype of ${largerStr} is ${typeof (largerStr)} and Datatype of ${smallerStr} is ${typeof (smallerStr)} `)
+            }
+
+            //For throwing an error if the given lenPos parameters is not a number datatype
+            if (typeof (lenPos) !== 'number') {
+                throw new TypeError(`'strEndsWith()' function can only take length parameter as number data type. Datatype of ${lenPos} is ${typeof (lenPos)}`)
+            }
+
+            //For testing the string using '.endsWith()' method and storing the output
+            let output = largerStr.endsWith(smallerStr, lenPos);
+
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strIndexOf function
+        //#strIndexOf function returns the position of the first occurrence of the specified smallerStr value in a largerStr string.
+        //#strIndexOf function returns -1 if there are no occurrence of the specified smallerStr value in a largerStr string.
+        // #strIndexOf takes 3 parameters: 1st parameter is the larger string (main string) on which the test / search to be done.
+        // 2nd parameter is the smaller string for which the test / search to be done.
+        // 3rd parameter is the start position: The starting index in the main string from which the test / search begins. This
+        // parameter is optional and default value is 0
+        "strIndexOf": function (largerStr, smallerStr, startPos = 0) {
+
+            //For throwing an error if the given string parameters are not a string datatype
+            if ((typeof (largerStr) !== 'string') || (typeof (smallerStr) !== 'string')) {
+                throw new TypeError(`'strIndexOf()' function only works on string type data. Datatype of ${largerStr} is ${typeof (largerStr)} and Datatype of ${smallerStr} is ${typeof (smallerStr)} `)
+            }
+
+            //For throwing an error if the given startPos parameters is not a number datatype
+            if (typeof (startPos) !== 'number') {
+                throw new TypeError(`'strIndexOf()' function can only take start index as number data type. Datatype of ${startPos} is ${typeof (startPos)}`)
+            }
+
+            //For testing the string using '.indexOf()' method and storing the output
+            let output = largerStr.indexOf(smallerStr, startPos);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strSubStr function
+        //#strSubStr function returns the extracted portion of the mainStr from the startIndx up to (but not including) the endIndx.
+        //#strSubStr takes 3 parameters: 1st parameter is the main string from which the substring is extracted.
+        // 2nd parameter: the start index from which (including the index) the extraction begins.
+        // 3rd parameter is the endIndex parameter up to (not including) which index of the extration take places. This parameter is optional
+        // if omitted then the extraction continues to the end of the string (including last character of the main string).
+        "strSubStr": function (mainStr, startIndx = 0, endIndx = (mainStr.length)) {
+
+            //For throwing an error if the given string parameter is not a string datatype
+            if (typeof (mainStr) !== 'string') {
+                throw new TypeError(`'strSubStr()' function only works on string type data. Datatype of ${mainStr} is ${typeof (mainStr)}`)
+            }
+
+
+            //For throwing an error if the index parameters are not a number datatype
+            if ((typeof (startIndx) !== 'number') || (typeof (endIndx) !== 'number')) {
+                throw new TypeError(`'strSubStr()' function can only take start and index as number data type. Datatype of ${startIndx} is ${typeof (startIndx)} and datatype of ${endIndx} is ${typeof (endIndx)}`)
+            }
+
+            //For extraction the string using '.subString()' method and storing the output
+            let output = mainStr.substring(startIndx, endIndx);
+
+            //For returning the output
+            return output;
+
+
+        },
+
+        //For defining the #strRepeat function
+        //#strRepeat function returns a new string which contains the specified number of copies of the string, concatenated together.
+        "strRepeat": function (str, count = 1) {
+            //For throwing an error if the given string parameter is not a string datatype
+            if (typeof (str) !== 'string') {
+                throw new TypeError(`'strRepeat()' function only works on string type data. Datatype of ${str} is ${typeof (str)}`)
+            }
+
+
+            //For throwing an error if the count parameters is not a number datatype
+            if (typeof (count) !== 'number') {
+                throw new TypeError(`'strRepeat()' function can only take count parameter as number data type. Datatype of ${count} is ${typeof (count)}`)
+            }
+
+            //For repeating the string using '.repeat()' method and storing the output
+            let output = str.repeat(count);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strReplace function
+        //#strReplace function searchs for a specifed sub string within the main string, replaces the first occurrence of that substring with
+        //the given replacement string, and returns the new (resulting) string.
+        "strReplace": function (mainStr, searchValue = '', replacement = '') {
+            //For throwing an error if the given string parameters are not a string datatype
+            if ((typeof (mainStr) !== 'string') || (typeof (searchValue) !== 'string') || (typeof (replacement) !== 'string')) {
+                throw new TypeError(`'strReplace()' function only works on string type data. Datatype of ${mainStr} is ${typeof (mainStr)} , datatype of ${searchValue} is ${typeof (searchValue)} and datatype of ${replacement} is ${typeof (replacement)} `)
+            }
+
+            //For replacing the string using '.replace()' method and storing the output
+            let output = mainStr.replace(searchValue, replacement);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #strReplaceAll function
+        //#strReplaceAll function searchs for a specifed sub string within the main string, replaces all the occurrence of that substring with
+        //the given replacement string, and returns the new (resulting) string.
+        "strReplaceAll": function (mainStr, searchValue = '', replacement = '') {
+            //For throwing an error if the given string parameters are not a string datatype
+            if ((typeof (mainStr) !== 'string') || (typeof (searchValue) !== 'string') || (typeof (replacement) !== 'string')) {
+                throw new TypeError(`'strReplaceAll()' function only works on string type data. Datatype of ${mainStr} is ${typeof (mainStr)} , datatype of ${searchValue} is ${typeof (searchValue)} and datatype of ${replacement} is ${typeof (replacement)} `)
+            }
+
+            //For replacing the string using '.replaceAll()' method and storing the output
+            let output = mainStr.replaceAll(searchValue, replacement);
+
+            //For returning the output
+            return output;
+        },
+
+        //For defining the #vpVer function
+        //#vpVer function returns the current version of the ViewPoint in a string format
+        "vpVer": function () {
+            //For storing the output
+            const output = "ViewPoint v2.1.2";
+
+            //For returning the output
+            return output;
+        },
+
         //ViewPointThis will be used for accessing whole ViewPoint class from inside of any object or method
         ViewPointThis: this,
 
@@ -1098,19 +1641,19 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
         //If variable name is not defined
         if (name === undefined) {
             //Throw error regarding empty variable name
-            throw new Error("Variable Name Error: Variable name is required and cannot be empty.");
+            throw new SyntaxError("Variable Name Error: Variable name is required and cannot be empty.");
         }
 
         //For checking if the variable name qualifies as a valid variable name or not
         else if (regex.test(name) === false) {
             //Throw error regarding invalid variable value
-            throw new Error("Variable Name Error: Variable name is not valid");
+            throw new SyntaxError("Variable Name Error: Variable name is not valid");
         }
 
         //If the value is not defined
         else if (value === undefined) {
             //Throw error regarding empty variable value
-            throw new Error(`Variable Value Error: Value for variable '${name}' is required and cannot be empty.`);
+            throw new SyntaxError(`Variable Value Error: Value for variable '${name}' is required and cannot be empty.`);
         }
 
 
@@ -1124,7 +1667,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
         //If variable name is not defined
         if (name === undefined) {
             //Throw error regarding empty variable name
-            throw new Error("Variable Name Error: Variable name is required and cannot be empty.");
+            throw new SyntaxError("Variable Name Error: Variable name is required and cannot be empty.");
         } else {
 
             //For deleting the specified variable from the ViewPoint 's variables_DB
@@ -1139,7 +1682,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
         //If function name is not defined
         if (name === undefined) {
             //Throw error regarding empty variable name
-            throw new Error("Function Name Error: Function name is required and cannot be empty.");
+            throw new SyntaxError("Function Name Error: Function name is required and cannot be empty.");
         } else {
 
             //For deleting the specified function from the ViewPoint 's 'func_DB_extrnl'
@@ -1229,7 +1772,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
             //If the string is not properly enclosed by matching quotes (i.e If the first and last characters of the string do not
             //match (e.g., '"Hello' or "'Hello]")) ,then throw an error indicating that the string text is not properly enclosed.
             else {
-                throw new Error(`Unmatched or missing quotes: ${str} text is not properly enclosed.`)
+                throw new SyntaxError(`Unmatched or missing quotes: ${str} text is not properly enclosed.`)
             }
 
 
@@ -1300,7 +1843,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
             //For thorwing error regarding un-known token
             else {
                 //Thorw error indicating that the token is un-known
-                throw new Error(`${str} is not defined.`)
+                throw new ReferenceError(`${str} is not defined.`)
 
             }
         }
@@ -1459,9 +2002,17 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                     //For storing the token type value after checking the current character
                     token_type = 'name';
 
+                    //For tokenizing BigInt number format (e.g. '25n' , '383n' ,'48004n'):
                     //If the current character is 'n' and previous character of 'n' is a number from 0-9,
                     //thats mean the current character 'n' is working as 'number' (instead of 'name')
                     if (char === 'n' && (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(expr[index_of_expr - 1]))) {
+                        token_type = 'number';
+                    }
+
+                    //For tokenizing exponential / scientific number format (e.g. '15e2' , '18e+4' , '20e-5'):
+                    //If the current character is 'e' or 'E' and the previous character of 'e' or 'E' is a number from 0-9 or a decimel point ('.'),
+                    //thats mean the current character 'e' or 'E' is working as exponent separator character (instead of 'name')
+                    if (((char === 'e') || (char === 'E')) && (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'].includes(expr[index_of_expr - 1]))) {
                         token_type = 'number';
                     }
 
@@ -1472,6 +2023,14 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
                     //For storing the token type value after checking the current character
                     token_type = 'operator';
+
+                    //For tokenizing exponential / scientific number format (e.g. '18e+4' , '20e-5'):
+                    //If the current operator character is '+' or '-' and the immediate previous character is a 'e' or 'E' and the character before the previous
+                    //character (previous of that 'e' or 'E' character) is a number from 0-9 or a decimel point ('.'), thats mean the current operator character
+                    //('+' or '-') is working as sign of the exponential number (exponent sign) (instead of 'name')
+                    if (((char === '+') || (char === '-')) && (['e', 'E'].includes(expr[index_of_expr - 1])) && (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'].includes(expr[index_of_expr - 2]))) {
+                        token_type = 'number';
+                    }
                 };
 
 
@@ -1532,7 +2091,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
         //meaning there is a text section that was started with a quotation character but not properly terminated with a matching quotation character.
         if (quote_block !== "") {
             // For throwing an error message indicating that the string contains unclosed quoted text
-            throw new Error(`Unclosed quoted text detected: ${expr} contains unclosed quoted text`)
+            throw new SyntaxError(`Unclosed quoted text detected: ${expr} contains unclosed quoted text`)
         }
 
         else {
@@ -1670,7 +2229,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
 
                                     //If crntFuncArg array is empty then a error messaage will be thrown
                                     if (crntFuncArg.length === 0) {
-                                        throw new Error(`Expected argument before the "," character in the function '${funcName}'`);
+                                        throw new SyntaxError(`Expected argument before the "," character in the function '${funcName}'`);
                                     }
                                     else {
                                         //For storing tokenized-refined infix expresion of the crntFuncArg array into the refined_Token array
@@ -1720,7 +2279,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                         if ((indx_of_Token_Arry === (tokenized_expr.length - 1)) && (bracktCount !== 0)) {
 
                             //For throwing error about missing closing parentheses (")") of the function
-                            throw new Error(`Missing closing parentheses (")") detected. '${funcName}' function does not en-closed properly.`)
+                            throw new SyntaxError(`Missing closing parentheses (")") detected. '${funcName}' function does not en-closed properly.`)
                         }
 
                         //For incrementing index
@@ -1859,8 +2418,6 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                             //value to the arguments value) to funcTkns for evaluating
                             funcTkns = temp_funcTkns;
 
-                            console.log(funcTkns)
-
                             //For refining the funcTkns array and stores it back to the funcTkns array
                             funcTkns = this.refine(...funcTkns);
 
@@ -1876,7 +2433,7 @@ Received ${value1} type of ${typeof (value1)} and ${value2} type of ${typeof (va
                         //More arguments are provided than the decleared parameters number
                         //And the in-line function defination does not have 'rest' keyword in its defined parameters'
                         else if ((funcArgArry.length > parm.length) && (!parm.includes('rest'))) {
-                            throw new Error(`Less arguments are expected in the '${funcName}()' function.
+                            throw new SyntaxError(`Less arguments are expected in the '${funcName}()' function.
 Total expected number of arguments is ${parm.length}, actual number of arguments received ${funcArgArry.length}.`);
 
                         }
@@ -1885,7 +2442,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                         //Less arguments are provided than the decleared parameters number
                         //And the in-line function defination does not have 'rest' keyword in its defined parameters'
                         else if ((funcArgArry.length < parm.length) && (!parm.includes('rest'))) {
-                            throw new Error(`More arguments are expected in the '${funcName}()' function.
+                            throw new SyntaxError(`More arguments are expected in the '${funcName}()' function.
 Total expected number of arguments is ${parm.length}, actual number of arguments received ${funcArgArry.length}.`);
 
                         }
@@ -1906,7 +2463,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                         let msg = `The '${funcName}()' function is not found in the internal or external functions list. To use #${funcName}() function you need to define it first`;
 
                         //For throwing error message regarding unavailability of the current function
-                        throw new Error(msg);
+                        throw new ReferenceError(msg);
                     }
 
 
@@ -1930,7 +2487,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                     //If the function name is undefined thats mean the currently pointed element is not availiable
                     if (funcName === undefined) {
                         //For throwing the error message regading unexpected end of input
-                        throw new Error('Unexpected end of input. "func" keyword needs function name')
+                        throw new SyntaxError('Unexpected end of input. "func" keyword needs function name')
                     }
 
                     //Will be used for counting the matching opening and closing bracket / parentheses ("(" or ")")
@@ -1983,7 +2540,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                                 if (postFix_expr_arry.length > 1) {
 
                                     //For throwing error regarding multiple tokens detected 
-                                    throw new Error(`Multiple tokens detected in ${funcName} function 's parameter`);
+                                    throw new SyntaxError(`Multiple tokens detected in ${funcName} function 's parameter`);
                                 }
                                 else if (postFix_expr_arry.length === 1) {
 
@@ -2028,7 +2585,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
 
                                     //If crntFuncParm array is empty then a error messaage will be thrown
                                     if (crntFuncParm.length === 0) {
-                                        throw new Error(`Expected parameter before the "," character in the function '${funcName}'`);
+                                        throw new SyntaxError(`Expected parameter before the "," character in the function '${funcName}'`);
                                     }
                                     else {
                                         //For converting and storing the raw crntFuncParm (infix) expression array to its
@@ -2041,7 +2598,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                                         if (postFix_expr_arry.length > 1) {
 
                                             //For throwing error regarding multiple tokens detected 
-                                            throw new Error(`Multiple tokens detected in ${funcName} function 's parameter`);
+                                            throw new SyntaxError(`Multiple tokens detected in ${funcName} function 's parameter`);
                                         }
                                         else if (postFix_expr_arry.length === 1) {
 
@@ -2082,7 +2639,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                     //If the assignment operator is missing
                     if (ele !== '=') {
                         //Throws an error regarding the missing assignment operator ('=')
-                        throw new Error(`Expected assignment operator ('=') after the '${funcName}(${funcParmArry})'`)
+                        throw new SyntaxError(`Expected assignment operator ('=') after the '${funcName}(${funcParmArry})'`)
                     };
 
                     //For pointing to the next token (i.e. function expression starting point)
@@ -2257,8 +2814,15 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                     //ladder in this refine method.
                     else {
                         //For throwing the error message
-                        throw new Error(`Data Type Error: '!' operator can only be used with boolean values`)
+                        throw new TypeError(`Data Type Error: '!' operator can only be used with boolean values`)
                     }
+
+                    //For incrementing index to point to the next token (i.e on the boolean value token)
+                    //Note: In the next iteration, the main for loop will increment this index again,
+                    //causing this pointed boolean value token to be skipped completely.
+                    indx_of_Token_Arry = indx_of_Token_Arry + 1;
+
+
                 }
 
                 //For implementing ternary ( (condition) ? (value if true) :(value if false) )operator
@@ -2655,7 +3219,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
             if ((isOperator === false) && (math_def.character_def.getCharType(ele_value[0]) === 'operator')) {
 
                 //For throwing error message for unkown operator
-                throw new Error(`Unkown Operator: ${ele_value} is found in the expression`);
+                throw new SyntaxError(`Unkown Operator: ${ele_value} is found in the expression`);
             }
 
 
@@ -2683,7 +3247,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
                 //and likely contains a missing operand(s)
                 if ((secnd_value === undefined) || (frst_value === undefined)) {
                     //For throwing the error regarding invalid expression
-                    throw new Error(`Invalid expression: Missing operands detected in the expression`);
+                    throw new SyntaxError(`Invalid expression: Missing operands detected in the expression`);
                 }
 
                 //For exponential / power operator (^) or (**)
@@ -2810,7 +3374,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
         else if ((expr_stack.length) > 1) {
 
             //For throwing the error regarding missing operator
-            throw new Error(`Invalid expression: Missing operator detected in the expression`);
+            throw new SyntaxError(`Invalid expression: Missing operator detected in the expression`);
         }
 
     }
@@ -2844,7 +3408,7 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
 
         }
         else {
-            throw new Error('Expression must be a string');
+            throw new TypeError('Expression must be a string');
         }
     }
 
@@ -2951,11 +3515,13 @@ Error in line number: ${lineCount}`)
 
         }
         else {
-            throw new Error('Expression must be a string');
+            throw new TypeError('Expression must be a string');
         }
     }
 
 }
+
+
 
 
 
