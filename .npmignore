@@ -1,0 +1,11 @@
+Screenshots/
+node_modules/
+
+.gitignore
+.npmignore
+.gitattributes
+
+package-lock.json
+
+guchho.config.js
+
