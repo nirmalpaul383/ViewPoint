@@ -1,0 +1,46 @@
+{
+  "name": "viewpointjs",
+  "version": "2.1.2",
+  "description": "A Math expression parser and evaluator with support of runtime data-type checking written in native JS.",
+  "type": "module",
+  "main": "dist/viewpoint.cjs.cjs",
+  "module": "dist/viewpoint.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/viewpoint.esm.js",
+      "require": "./dist/viewpoint.cjs.cjs"
+    }
+  },
+  "browser": "dist/viewpoint.js",
+  "unpkg": "dist/viewpoint.min.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "clean": "guchho clean",
+    "build": "guchho build"
+  },
+  "keywords": [
+    "math",
+    "viewpoint",
+    "parser",
+    "expression",
+    "evaluator",
+    "calculator",
+    "javascript"
+  ],
+  "author": "Nirmal Paul (https://github.com/nirmalpaul383/)",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nirmalpaul383/viewpoint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nirmalpaul383/viewpoint/issues"
+  },
+  "homepage": "https://github.com/nirmalpaul383/viewpoint#readme",
+  "devDependencies": {
+    "@guchho/banner": "^0.1.4",
+    "guchho": "^1.0.8"
+  }
+}
