@@ -3521,6 +3521,12 @@ Error in line number: ${lineCount}`)
 
 }
 
+//Expose the class globally, so that this file keeps working as a plain browser
+//script (CDN/script tag) and can also be consumed by module bundlers
+if (typeof globalThis !== 'undefined') {
+    globalThis.ViewPoint = ViewPoint;
+}
+
 
 
 
