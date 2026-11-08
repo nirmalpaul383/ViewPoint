@@ -6,6 +6,7 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
 
 ## Tables of Contents
 - [What's new](#whats-new)
+  - [v2.1.3](#v213)
   - [v2.1.2](#v212)
   - [v2.1.1](#v211)
   - [v2.1.0](#v210)
@@ -55,6 +56,9 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
 - [Thanks](#thanks)
 
 ## What's new
+  - ### v2.1.3
+      1. <b>Fixed an infinite loop bug:</b> Fixed a bug that caused an infinite loop when evaluating expressions containing closing parentheses (`)`) without corresponding opening parentheses (`(`).
+      2. <b>npm package release:</b> `ViewPoint.js` is now available as an npm package under the name `viewpointjs`. Special thanks to @hemanta-gayen and his [guchho](https://guchho.js.org/) bundler.
   - ### v2.1.2
       1. Added support for scientific (exponential) number notation as input, such as `15e2`, `18e+4`, and `20e-5`.
       2. Fixed an issue where console.log() was executed whenever an inline function was evaluated. The leftover testing code (`console.log(...)`) has been removed from the release version. Sorry for any inconvenience caused.
@@ -203,11 +207,40 @@ ViewPoint is a math expression parser and evaluator that supports runtime data-t
 
 ---
 ## How to include this library in your project?
-To use this evaluator/library, firstly, you need to link **ViewPoint.js** to your project. You can do that by using two ways:
-1. **Download/Clone and Use:** Download or clone the repository and use the **ViewPoint.js** file in your project.
-2. **Use via CDN:**
-     - Use the library directly via CDN using the following script tag: ```https://cdn.jsdelivr.net/gh/nirmalpaul383/ViewPoint/ViewPoint.js```
-     - For using it in browser/webpage you can use ```<script src="https://cdn.jsdelivr.net/gh/nirmalpaul383/ViewPoint/ViewPoint.js"></script>```
+To use this evaluator/library, firstly, you need to link **ViewPoint.js** to your project.
+### Using NPM
+1. Install `viewpointjs` from NPM using the below command:
+> `npm i viewpointjs`
+
+2. Configure the module system: <br><b>ViewPointjs</b> supports both CommonJS (CJS) and ECMAScript Modules (ESM) system. You can use select the module system as per your choice
+
+||CommonJS (CJS)|ECMAScript Modules (ESM)|
+|-|-|-|
+|<b>package.json</b>|`"type": "commonjs"` <br> or <br> Remove the `"type"` field from the <b>package.json</b> file |`"type": "module"`|
+
+3. Create a ViewPoint object: <br> Create a object with `ViewPoint` class using the syntax corresponding to the chosen module system.
+
+|CommonJS (CJS)|ECMAScript Modules (ESM)|
+|-|-|
+|`//Create a ViewPoint object using CommonJS (CJS) syntax:` <br><br> `//For importing the viewpointjs library` <br> `let VP_lib = require("viewpointjs");` <br><br> `//For creating a new object with ViewPoint class` <br> `const ViewPoint_obj = new VP_lib.ViewPoint();`|`//Create a ViewPoint object using ECMAScript Modules (ESM) syntax:` <br><br> `//For importing ViewPoint class from the viewpointjs library` <br> `import { ViewPoint } from "viewpointjs";` <br><br> `//For creating a new object with ViewPoint class` <br> `const ViewPoint_obj = new ViewPoint();`|
+
+### Using via CDNs
+1. **Include the library:**
+   - **via `jsdelivr`:**
+     - Use the library directly via CDN using the following script tag: ```https://cdn.jsdelivr.net/npm/viewpointjs@2.1.3/dist/viewpoint.js```
+     - For using it in browser/webpage you can use ```<script src="https://cdn.jsdelivr.net/npm/viewpointjs@2.1.3/dist/viewpoint.js"></script>```
+
+   - **via `unpkg`:**
+     - Use the library directly via CDN using the following script tag: ```https://unpkg.com/viewpointjs@2.1.3/dist/viewpoint.js```
+     - For using it in browser/webpage you can use ```<script src="https://unpkg.com/viewpointjs@2.1.3/dist/viewpoint.js"></script>```
+
+2. **Create a ViewPoint object:**
+     - After including the library you can use `new ViewPoint();` to create a object with ViewPoint class
+     ```javascript
+     //Create a new ViewPoint object with ViewPoint class
+     let ViewPoint_obj = new ViewPoint();
+     ```
+
 ---
 [⬆ Back to the Tables of Contents ⬆](#tables-of-contents)
 

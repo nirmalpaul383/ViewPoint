@@ -5,8 +5,7 @@ const sharedOutputOptions = {
   target: "esnext",
   bundle: true,
   sourcemap: true,
-  treeShaking: true,
-  exports: "none"
+  treeShaking: true
 }
 
 export default [

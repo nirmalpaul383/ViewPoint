@@ -3175,6 +3175,14 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
 
                         //For rechecking the value of the last element of the stack
                         lst_ele_of_stack = stack[stack.length - 1];
+
+                        //If the stack becomes empty (i.e stack.length is equal to 0), but the rechecking was still done for getting the value of
+                        //the last element of the stack thats mean in the given expression there was no matching "(" .Or in other words it can be 
+                        //said that when (stack.length - 1) is equal to -1 thats mean there was no matching opening parentheses "(".
+                        if (((stack.length - 1) === -1)) {
+                            //For throwing the error
+                            throw new SyntaxError(`Missing opening parentheses "(" detected. The expression contains unclosed or unbalanced parentheses`);
+                        }
                     }
 
                     //For poping the left parenthesis from the top of the stack
@@ -3187,7 +3195,20 @@ Total expected number of arguments is ${parm.length}, actual number of arguments
         //When looping through each token in the infix_expression_array is being completed, then we need to pop any remaining operators from
         //the top of the stack and push them to the to postfix_expr_array until the stack is empty
         while ((stack.length) !== 0) {
-            postfix_expr_array.push(stack.pop());
+
+            //If the last element of the stack is a opening parentheses ("("), thats mean the expression has unclosed / unbalanced parentheses
+            if (stack[stack.length - 1] === "(") {
+                //For throwing the error
+                throw new SyntaxError(`Missing closing parentheses ")" detected. The expression contains unclosed or unbalanced parentheses`);
+            }
+
+            //For any other operator
+            else {
+
+                //For popping any remaining operators from the top of the stack and push them to the to postfix_expr_array
+                postfix_expr_array.push(stack.pop());
+
+            }
         }
 
         //Return the postfix_expr_array
@@ -3521,12 +3542,17 @@ Error in line number: ${lineCount}`)
 
 }
 
+
 //Expose the class globally, so that this file keeps working as a plain browser
 //script (CDN/script tag) and can also be consumed by module bundlers
 if (typeof globalThis !== 'undefined') {
     globalThis.ViewPoint = ViewPoint;
 }
 
+
+//For exporting the ViewPoint class for using as modules 
+export { ViewPoint };
+export default ViewPoint;
 
 
 
